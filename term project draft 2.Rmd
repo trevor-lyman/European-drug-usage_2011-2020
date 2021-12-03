@@ -1,0 +1,1675 @@
+---
+title: "Term Project Draft 2"
+author: "Trevor Pettit, Scout Thompson, Jake Simanek & Peter Baker"
+date: "11/10/2021"
+output: 
+  html_document:
+    code_folding: hide
+    theme: default
+    highlight: tango
+    toc: true
+    toc_float: true
+---
+
+# 1.0 Project Overview
+
+## 1.1 Introduction
+Initially used to track and contain disease outbreaks in the 1940s (Metcalf et al., 1995), wastewater analysis has quickly gained traction as a way to monitor other public health measures such as the usage of illicit drugs (Zuccato et al., 2008). Wastewater based epidemiology (WBE) is a chemical analysis technique used to detect a myriad of compounds for regions serviced by wastewater treatment facilities. The functions of this technique range from monitoring environmental impact of household liquid waste to the very topical application of detecting the presence of Covid-19 (Glassmeyer et al., 2005), (Bentacourt et al., 2021).Following the consumption of illicit drugs, the body enzymatically breaks them down into by-products known as drug metabolites. As the process of metabolizing drugs is the same within all humans, the type and quantity of  produced metabolites is already known (Concheiro et al., 2007). With this knowledge, scientists are able to estimate the **quantity of drugs consumed (drug usage)** within a community by measuring the metabolites within the local wastewater (Zuccato et al., 2008). Estimating the use of illicit drugs within a community is a crucial public health matter due to the known harms that regular consumption can cause (Bannwarth et al., 2019). This information can be used to help direct policies and distribute resources to communities in need. 
+
+The following analysis is based off a wastewater analysis study which estimated the **drug usage** of *amphetamines*, *cannabis*, *cocaine*, *3,4-Methylenedioxymethamphetamine (MDMA)*, and *methamphetamine* within 137 cities across 29 European countries between 2011 and 2020 (EMCDDA, 2021). In our analysis, we sought to test whether **drug usage** varies between countries. Previous research suggests that **drug usage** is related to population-level age demographics; self-reported drug usage tends to be greatest in youth populations (Health Canada, 2010). Consistent with the definition of youth used by the European Monitoring Centre for Drugs and Drug Addiction (EMCDDA), we chose to define youth as those aged 15 to 24. Accordingly, we hypothesized that differences in the **relative proportion of youth (expressed as a percentage, PctYouth)** would explain differences in **drug usage** between countries. Previous research also suggests that **drug usage** is related to population-level wealth demographics (Lipari and Park-Lee, 2019). We chose **GDP** as a measure of population wealth because it is widely referenced and compared in the literature (Nagelhout et al., 2017). Accordingly, we hypothesized that differences in **Gross Domestic Product (GDP)** would also explain differences in **drug usage** between countries.
+
+This analysis is important because it helps contribute to our understanding of the social determinants of health. Our analysis will specifically help improve our understanding of the characteristics of populations that may correspond to increased **drug usage**.
+
+## 1.2 Sampling design
+In an attempt to improve the reliability of the data, only **reference countries** that had **drug usage** estimates available for at least six **reference cities** in the original drug usage data set were considered in our analysis. Thus, the **reference countries** for our analysis include: *Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*. The sample for the following analysis was constructed from the observations corresponding to the average weekday drug usage of 5 different types of **reference drugs** (*amphetamines*, *canabis*, *cocaine*, *methamphetamine*, and *MDMA*), measured across **reference cities** nested within six European **reference countries**, between the **reference years** 2011 and 2020. Average weekday usage was chosen because weekend usage data are unavailable for many of the observations in the original drug usage data set. Note that observations corresponding to a number of combinations of type of illicit reference drug, reference city, and reference year are also missing  from the original data.
+
+# 2.0 Operational Definitions
+Throughout this document, bold text represents vocabulary terms that have been given specific, operational definitions for the context of the following analysis. These terms and definitions are provided below. 
+
+|Term       |Definition                           |
+|:----------|:------------------------------------|
+|**Drug Usage**| Reported for each reference city and reference drug in mg/1000 people/day (EMCDDA, 2021). For additional information, see *Appendix A*.|
+|**Gross Domestic Product (GDP)**| The sum of gross value added by all resident producers in the economy, plus any product taxes and minus any subsidies not included in the value of products, reported for each country of interest in 2010 United States Dollars (USD). Calculated without making deductions for depreciation of fabricated assets for depletion and degradation of natural resources (World Bank Data, 2021). For more information on why this metric was chosen, see *Section 3.3*.|
+|**PctYouth**| The number of individuals in the population that fall within the age range 15-24. Reported for each country of interest as a percentage (UN Department of Economic and Social Affairs, 2019). For more information on why this metric was chosen, see *Section 3.2*.|
+|**Reference city**| The cities across the 6 European countries that drug usage was estimated in. For additional information, see *Appendix A*.|
+|**Reference country**| The 6 European countries (*Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*) corresponding to drug usage estimates used in the present analysis. For ease of recognition, the names of these reference countries are presented in italics throughout this document. For more information on how these countries were selected, see *Section 1.2*.|
+|**Reference drug**| The 5 types of drugs (*amphetamines*, *cannabis*, *cocaine*, *MDMA*, *methamphetamine*) corresponding to drug usage estimates used in the present analysis. Throughout this document, the names of these illicit drugs are presented in italics for ease of recognition. For additional information on the types of illicit drugs considered in this analysis, see *Appendix B*.|
+|**Reference year**| The 10 years (2011-2020) corresponding to drug usage estimates used in the present analysis. For additional information, see *Appendix A*.|
+|**Wastewater based epidemiology (WBE)**| A chemical analysis technique used to detect compounds in the waters serviced by wastewater treatment facilities. For example, WBE is used in the present analysis to produce estimates of **drug usage**. For more information on WBE, see *Appendix C*. 
+
+# 3.0 Data acquisition
+The following section provides a brief overview of the data acquisition for the **drug usage**, **population age**, and **population wealth** estimates used in our analysis. For more information, see the full project metadata in *Appendix A*. 
+
+## 3.1 Drug Use Data
+**Drug usage** data was accessed through the European Monitoring Center for Drugs and Drug Addiction website (EMCDDA) (https://www.emcdda.europa.eu/publications/html/pods/waste-water-analysis_en#siteInfoTable). This data set looked at the usage of five common illicit drugs (*amphetamines*, *cannabis*, *cocaine*, *methamphetamine*, and *MDMA*), as measured in the wastewater of 137 cities across 29 European countries. The data were collected daily (in mg per 1000 people per day) over a span of 10 years (from 2011 to 2020). The data was averaged for each day of the week, the weekend, and the weekdays for each city over every year considered. 
+
+The subset of **drug use** data of interest is constructed from the **mean weekday usage** of each **reference drug** in each combination of **reference city**, nested within **reference country**, and **reference year**. For more information, including why weekday mean values were used and missing data in the original *drug use data set*, see *Section 1.2*.
+
+## 3.2 Population Age Data
+Data on **population age demographics** were accessed from the United Nations Department of Economic and Social Affairs website (https://population.un.org/wpp/). Data were available from 235 countries and regions over a period of 60 years (from 1950-2020). These data show the proportion of the population accounted for by a number of pre-defined age groups (e.g. youth aged 15-24).
+
+The subset of age data of interest was the **proportion of the population aged 15-24 (PctYouth)** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.2*).
+
+## 3.3 Population Wealth Data
+Data on **population wealth demographics** were accessed via the World Bank website (https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?fbclid=IwAR3tVOmvWo6ijRcavhXuUEhoDZgkVFE4DeiD1CtiZDYYiqpVk8sj0kSxxIY). This data set includes annual Gross Domestic Product (GDP; measured in the value of the 2010 US Dollar) for approximately 200 countries and regions between 1960 and 2020. 
+
+The subset of wealth data of interest was the **annual Gross Domestic Product (GDP)** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.2*). 
+
+# 4.0 Setup 
+In this section, we set the R Markdown Document (RMD) up for analysis. Setting the document up for analysis involved two steps, loading the dependency libraries, and importing data.
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 4.1 Load Libraries 
+The first step of setting up our RMD was to load the dependency libraries. Descriptions and references for each of these packages are available in *Appendix D*. 
+``` {r Setup: Load Libraries, results = FALSE, message = FALSE}
+library(ggplot2)
+library(dplyr)
+library(ggfortify)
+library(readr)
+library(tidyr)
+library(stringr)
+library(lubridate)
+library(plotrix)
+library(lattice)
+```
+
+## 4.2 Import Data
+The second step of setting up our RMD was to import the raw data. The raw data files used in this RMD are available as a part of a GitHub Repository for this project (https://github.com/trevor-lyman/term.project).
+
+First, we imported the **drug usage** data. 
+```{r Import Data: Drug Metabolite Data}
+# step 1: read .csv files
+# 2011
+amphetamine_2011 <- read.csv("Data/Drug Metabolite Data/2011/WW-data-amphetamine-2011.csv")
+cannabis_2011 <- read.csv("Data/Drug Metabolite Data/2011/WW-data-cannabis-2011.csv")
+cocaine_2011 <- read.csv("Data/Drug Metabolite Data/2011/WW-data-cocaine-2011.csv")
+MDMA_2011 <- read.csv("Data/Drug Metabolite Data/2011/WW-data-MDMA-2011.csv")
+methamphetamine_2011 <- read.csv("Data/Drug Metabolite Data/2011/WW-data-methamphetamine-2011.csv")
+
+# 2012
+amphetamine_2012 <- read.csv("Data/Drug Metabolite Data/2012/WW-data-amphetamine-2012.csv")
+cannabis_2012 <- read.csv("Data/Drug Metabolite Data/2012/WW-data-cannabis-2012.csv")
+cocaine_2012 <- read.csv("Data/Drug Metabolite Data/2012/WW-data-cocaine-2012.csv")
+MDMA_2012 <- read.csv("Data/Drug Metabolite Data/2012/WW-data-MDMA-2012.csv")
+methamphetamine_2012 <- read.csv("Data/Drug Metabolite Data/2012/WW-data-methamphetamine-2012.csv")
+
+# 2013 -- no cannabis data available
+amphetamine_2013 <- read.csv("Data/Drug Metabolite Data/2013/WW-data-amphetamine-2013.csv")
+cannabis_2013 <- read.csv("Data/Drug Metabolite Data/2013/WW-data-cannabis-2013.csv")
+cocaine_2013 <- read.csv("Data/Drug Metabolite Data/2013/WW-data-cocaine-2013.csv")
+MDMA_2013 <- read.csv("Data/Drug Metabolite Data/2013/WW-data-MDMA-2013.csv")
+methamphetamine_2013 <- read.csv("Data/Drug Metabolite Data/2013/WW-data-methamphetamine-2013.csv")
+
+# 2014 -- no cannabis data available
+amphetamine_2014 <- read.csv("Data/Drug Metabolite Data/2014/WW-data-amphetamine-2014.csv")
+cocaine_2014 <- read.csv("Data/Drug Metabolite Data/2014/WW-data-cocaine-2014.csv")
+MDMA_2014 <- read.csv("Data/Drug Metabolite Data/2014/WW-data-MDMA-2014.csv")
+methamphetamine_2014 <- read.csv("Data/Drug Metabolite Data/2014/WW-data-methamphetamine-2014.csv")
+
+# 2015 -- no cannabis data available
+amphetamine_2015 <- read.csv("Data/Drug Metabolite Data/2015/WW-data-amphetamine-2015.csv")
+cocaine_2015 <- read.csv("Data/Drug Metabolite Data/2015/WW-data-cocaine-2015.csv")
+MDMA_2015 <- read.csv("Data/Drug Metabolite Data/2015/WW-data-MDMA-2015.csv")
+methamphetamine_2015 <- read.csv("Data/Drug Metabolite Data/2015/WW-data-methamphetamine-2015.csv")
+
+# 2016 -- no cannabis data available
+amphetamine_2016 <- read.csv("Data/Drug Metabolite Data/2016/WW-data-amphetamine-2016.csv")
+cocaine_2016 <- read.csv("Data/Drug Metabolite Data/2016/WW-data-cocaine-2016.csv")
+MDMA_2016 <- read.csv("Data/Drug Metabolite Data/2016/WW-data-MDMA-2016.csv")
+methamphetamine_2016 <- read.csv("Data/Drug Metabolite Data/2016/WW-data-methamphetamine-2016.csv")
+
+# 2017 -- no cannabis data available
+amphetamine_2017 <- read.csv("Data/Drug Metabolite Data/2017/WW-data-amphetamine-2017.csv")
+cocaine_2017 <- read.csv("Data/Drug Metabolite Data/2017/WW-data-cocaine-2017.csv")
+MDMA_2017 <- read.csv("Data/Drug Metabolite Data/2017/WW-data-MDMA-2017.csv")
+methamphetamine_2017 <- read.csv("Data/Drug Metabolite Data/2017/WW-data-methamphetamine-2017.csv")
+
+# 2018 
+amphetamine_2018 <- read.csv("Data/Drug Metabolite Data/2018/WW-data-amphetamine-2018.csv")
+cannabis_2018 <- read.csv("Data/Drug Metabolite Data/2018/WW-data-cannabis-2018.csv")
+cocaine_2018 <- read.csv("Data/Drug Metabolite Data/2018/WW-data-cocaine-2018.csv")
+MDMA_2018 <- read.csv("Data/Drug Metabolite Data/2018/WW-data-MDMA-2018.csv")
+methamphetamine_2018 <- read.csv("Data/Drug Metabolite Data/2018/WW-data-methamphetamine-2018.csv")
+
+# 2019
+amphetamine_2019 <- read.csv("Data/Drug Metabolite Data/2019/WW-data-amphetamine-2019.csv")
+cannabis_2019 <- read.csv("Data/Drug Metabolite Data/2019/WW-data-cannabis-2019.csv")
+cocaine_2019 <- read.csv("Data/Drug Metabolite Data/2019/WW-data-cocaine-2019.csv")
+MDMA_2019 <- read.csv("Data/Drug Metabolite Data/2019/WW-data-MDMA-2019.csv")
+methamphetamine_2019 <- read.csv("Data/Drug Metabolite Data/2019/WW-data-methamphetamine-2019.csv")
+
+# 2020
+amphetamine_2020 <- read.csv("Data/Drug Metabolite Data/2020/WW-data-amphetamine-2020.csv")
+cannabis_2020 <- read.csv("Data/Drug Metabolite Data/2020/WW-data-cannabis-2020.csv")
+cocaine_2020 <- read.csv("Data/Drug Metabolite Data/2020/WW-data-cocaine-2020.csv")
+MDMA_2020 <- read.csv("Data/Drug Metabolite Data/2020/WW-data-MDMA-2020.csv")
+methamphetamine_2020 <- read.csv("Data/Drug Metabolite Data/2020/WW-data-methamphetamine-2020.csv")
+
+# step 2: check data
+head(amphetamine_2011); str(amphetamine_2011) # check the data
+```
+
+Next, we imported the population age (**PctYouth**) data. 
+```{r Import Data: PctYouth}
+raw.PctYouth <- read.csv("Data/Age Data/raw.age.csv", skip = 16) # read .csv file
+raw.PctYouth <- raw.PctYouth %>%
+  select(Region..subregion..country.or.area.., 
+         Reference.date..as.of.1.July., 
+         Population.aged.15.24) 
+# select 3 variables of interest
+
+head(raw.PctYouth); str(raw.PctYouth) # check data
+```
+
+Finally, we imported the population wealth (**GDP**) data. 
+```{r Import Data: GDP}
+raw.gdp <- as.data.frame(na.omit(pivot_longer(data = read.csv("Data/GDP Data/raw.gdp.csv", skip = 4), 
+                                              cols = 5:65, names_to = "year", values_to = "GDP"))) 
+#read .csv file; use pivot_longer() to transform to long format
+
+head(raw.gdp); str(raw.gdp) #check data
+```
+
+# 5.0 Tidying the Data
+After our data was imported into the R environment, our next step was to restructure the data to prepare for analysis. This is often referred to as 'tidying' the data (Beckerman et al., 2017). The goal of this section was to build a long-wise table that presented the **reference country**, **reference city**, **reference year**, **reference drug**, and **average weekday drug use** for each observation in the sample.
+
+## 5.1 Drug Usage Data
+First, we tidied the **drug usage** data. These data were imported as individual .csv files for each type of drug and reference year in *Section 4.2*; we wanted to merge these observations into a single dataframe that contained observations of the average weekday **drug usage** corresponding to each type of drug from each combination of **reference country** and **reference year** in the sample. Thus, we took a nested approach to tidying these data. Additionally, the names and structure of the variables in this dataframe needed to be corrected.
+
+First, we tidied each of the data corresponding to observations of the use of a **reference drug** from a single **reference year**. We repeated this step for each **reference drug** for a single **reference year**.  
+```{r Tidy Data: Drug Metabolite Data}
+#step 1: 2011 amphetamine
+amphetamine_2011.tidy <- amphetamine_2011 %>% #create data frame
+  select(c(country, city, Weekday.mean)) %>% 
+  # subset country, city, weekday mean concentration
+  mutate(year = c(rep(2011, length(amphetamine_2011$country)))) %>%
+  # add variable for reference year
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2011$country))))
+  # add variable for type of drug usage
+
+amphetamine_2011.tidy$country <- as.factor(amphetamine_2011.tidy$country)
+# make country a factor
+levels(amphetamine_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", 
+                                           FR = "France", B = "Great Britain", HR = "Hungary", 
+                                           IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                           SE = "Sweden")
+# change country codes to names of countries 
+head(amphetamine_2011.tidy); str(amphetamine_2011.tidy) # check the data
+```
+
+Then, we used these data to build an annual **drug usage** summary. This is a long-wise table showing the types and amount of **drug usage** observed in each **reference city** in the given **reference year**.
+```{r Tidy Data: Drug Metabolite Data -- Amphetamine 2011 Data}
+# 2011 cannabis 
+cannabis_2011.tidy <- cannabis_2011 %>% # create data frame
+  select(c(country, city, Weekday.mean)) %>%
+   # subset country, city, weekday mean concentration
+  mutate(year = c(rep(2011, length(cannabis_2011$country)))) %>%
+  # add variable for reference year
+  mutate(drug = c(rep("cannabis", length(cannabis_2011$country))))
+  # add variable for type of drug usage
+
+cannabis_2011.tidy$country <- as.factor(cannabis_2011.tidy$country)
+# make country a factor 
+levels(cannabis_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", 
+                                        FR = "France", HR = "Hungary", IT = "Italy", 
+                                        NL = "Netherlands", SE = "Sweden")
+# change country codes to names of countries 
+
+# 2011 cocaine
+cocaine_2011.tidy <- cocaine_2011 %>% # create data frame
+  select(c(country, city, Weekday.mean)) %>%
+   # subset country, city, weekday mean concentration
+  mutate(year = c(rep(2011, length(cocaine_2011$country)))) %>%
+  # add variable for reference year
+  mutate(drug = c(rep("cocaine", length(cocaine_2011$country))))
+  # add variable for type of drug usage
+cocaine_2011.tidy$country <- as.factor(cocaine_2011.tidy$country)
+# make country a factor 
+levels(cocaine_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", 
+                                       FR = "France", GB = "Great Britain", HR = "Hungary", 
+                                       IT = "Italy", NL = "Netherlands", NO = "Norway", SE = "Sweden")
+# change country codes to names of countries 
+
+# 2011 MDMA
+MDMA_2011.tidy <- MDMA_2011 %>% # create data frame
+  select(c(country, city, Weekday.mean)) %>%
+   # subset country, city, weekday mean concentration
+  mutate(year = c(rep(2011, length(MDMA_2011$country)))) %>%
+  # add variable for reference year
+  mutate(drug = c(rep("MDMA", length(MDMA_2011$country))))
+  # add variable for type of drug metabolie
+MDMA_2011.tidy$country <- as.factor(MDMA_2011.tidy$country)
+# make country a factor 
+levels(MDMA_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", FR = "France", 
+                                    GB = "Great Britain", HR = "Hungary", IT = "Italy", 
+                                    NL = "Netherlands", NO = "Norway", SE = "Sweden")
+# change country codes to names of countries 
+
+methamphetamine_2011.tidy.temp <- methamphetamine_2011 %>% # create data frame
+  select(c(country, city, methamphetamineWDMean2011)) %>%
+  # note that weekday mean concentration has a different name in this file than all others
+  mutate(Weekday.mean = methamphetamine_2011$methamphetamineWDMean2011) %>%
+  # fix name of weekday mean concentration to be consistent with others
+  mutate(year = c(rep(2011, length(methamphetamine_2011$country)))) %>%
+  # add variable for reference year
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2011$country))))
+  # add variable for type of drug usage
+methamphetamine_2011.tidy <- select(methamphetamine_2011.tidy.temp, -c(methamphetamineWDMean2011))
+# remove weekday mean variable with incorrect name
+methamphetamine_2011.tidy$country <- as.factor(methamphetamine_2011.tidy$country)
+# make country a factor 
+levels(methamphetamine_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", 
+                                               FR = "France", GB = "Great Britain", HR = "Hungary", 
+                                               IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                               SE = "Sweden")
+# change country codes to names of countries 
+
+drug_2011 <- rbind(amphetamine_2011.tidy, cannabis_2011.tidy, cocaine_2011.tidy, MDMA_2011.tidy, 
+                   methamphetamine_2011.tidy) # use rbind() to merge all drug usages in a single dataframe
+
+head(drug_2011); str(drug_2011) #check the data
+```
+
+After repeating this process for each reference year, we merged these annual **drug usage** summaries into a long-wise table adding the variable **reference year**. Finally, we reformatted the data types in the final table. 
+```{r Tidy Data: Drug Metabolite Data -- 2011 Drug Metabolite Data}
+# 2012
+# amphetamine
+amphetamine_2012.tidy <- amphetamine_2012 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2012, length(amphetamine_2012$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2012$country))))
+amphetamine_2012.tidy$country <- as.factor(amphetamine_2012.tidy$country)
+levels(amphetamine_2012$country) <- c(BE = "Belgium", CH = "Switzerland", CZ = "Czech Republic", 
+                                      ES = "Spain", FI = "Finland", FR = "France", GB = "Great Britain", 
+                                      HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                      NO = "Norway", SE = "Sweden")
+# cannabis 
+cannabis_2012.tidy <- cannabis_2012 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2012, length(cannabis_2012$country)))) %>%
+  mutate(drug = c(rep("cannabis", length(cannabis_2012$country))))
+cannabis_2012.tidy$country <- as.factor(cannabis_2012.tidy$country)
+levels(cannabis_2012.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic", ES = "Spain", 
+                                        FR = "France", HR = "Hungary", IT = "Italy", 
+                                        NL = "Netherlands", NO = "Norway", SE = "Sweden")
+# cocaine
+cocaine_2012.tidy <- cocaine_2012 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2012, length(cocaine_2012$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2012$country))))
+cocaine_2012.tidy$country <- as.factor(cocaine_2012.tidy$country)
+levels(cocaine_2012.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", CZ = "Czech Republic", 
+                                       ES = "Spain", FI = "Finland", FR = "France", HR = "Hungary", 
+                                       IT = "Italy", NL = "Netherlands", NO = "Norway", SE = "Sweden")
+# MDMA
+MDMA_2012.tidy <- MDMA_2012 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2012, length(MDMA_2012$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2012$country))))
+MDMA_2012.tidy$country <- as.factor(MDMA_2012.tidy$country)
+levels(MDMA_2012.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", CZ = "Czech Republic", 
+                                    ES = "Spain", FI = "Finland", HR = "Hungary", IT = "Italy", 
+                                    NL = "Netherlands", NO = "Norway", SE = "Sweden")
+# methamphetamine
+methamphetamine_2012.tidy <- methamphetamine_2012 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2012, length(methamphetamine_2012$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2012$country))))
+methamphetamine_2012.tidy$country <- as.factor(methamphetamine_2012.tidy$country)
+levels(methamphetamine_2012.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", 
+                                               CZ = "Czech Republic", ES = "Spain", FR = "France", 
+                                               HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                               NO = "Norway", SE = "Sweden")
+# 2012 annual summary
+drug_2012 <- rbind(amphetamine_2012.tidy, cannabis_2012.tidy, cocaine_2012.tidy, MDMA_2012.tidy, 
+                   methamphetamine_2012.tidy) 
+
+# 2013
+# amphetamine
+amphetamine_2013.tidy <- amphetamine_2013 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2013, length(amphetamine_2013$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2013$country))))
+amphetamine_2013.tidy$city <- as.factor(amphetamine_2013.tidy$city)
+amphetamine_2013.tidy$country <- as.factor(amphetamine_2013.tidy$country)
+levels(amphetamine_2013.tidy$country) <- c(BA = "Bosnia", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           DK = "Denmark", ES = "Spain", FI = "Finland", 
+                                           FR = "France", GB = "Great Britain", GR = "Greece", 
+                                           HR = "Hungary", NL = "Netherlands", NO = "Norway", 
+                                           PT = "Portugal", RO = "Romania", RS = "Serbia", 
+                                           SE = "Sweden", SK = "Slovakia")
+# cannabis
+cannabis_2013.tidy <- cannabis_2013 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2013, length(cannabis_2013$country)))) %>%
+  mutate(drug = c(rep("cannabis", length(cannabis_2013$country))))
+cannabis_2013.tidy$city <- as.factor(cannabis_2013.tidy$city)
+cannabis_2013.tidy$country <- as.factor(cannabis_2013.tidy$country)
+levels(cannabis_2013.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", DE = "Germany", 
+                                        DK = "Denmark", ES = "Spain", FR = "France", GR = "Greece", 
+                                        HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                        NO = "Norway", PT = "Portugal")
+# cocaine
+cocaine_2013.tidy <- cocaine_2013 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2013, length(cocaine_2013$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2013$country))))
+cocaine_2013.tidy$city <- as.factor(cocaine_2013.tidy$city)
+cocaine_2013.tidy$country <- as.factor(cocaine_2013.tidy$country)
+levels(cocaine_2013.tidy$country) <- c(BA = "Bosnia", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                       CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                       ES = "Spain", FR = "France", GB = "Great Britain", GR = "Greece", 
+                                       HR = "Hungary", IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                       PT = "Portugal", RO = "Romania", RS = "Serbia", SE = "Sweden", 
+                                       SK = "Slovakia")
+# MDMA
+MDMA_2013.tidy <- MDMA_2013 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2013, length(MDMA_2013$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2013$country))))
+MDMA_2013.tidy$city <- as.factor(MDMA_2013.tidy$city)
+MDMA_2013.tidy$country <- as.factor(MDMA_2013.tidy$country)
+levels(MDMA_2013.tidy$country) <- c(BA = "Bosnia", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                    ES = "Spain", FI = "Finland", FR = "France", GB = "Great Britain", 
+                                    GR = "Greece", HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                    NO = "Norway", PT = "Portugal", RO = "Romania", RS = "Serbia", 
+                                    SE = "Sweden", SK = "Slovakia")
+# methamphetamine
+methamphetamine_2013.tidy <- methamphetamine_2013 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2013, length(methamphetamine_2013$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2013$country))))
+methamphetamine_2013.tidy$city <- as.factor(methamphetamine_2013.tidy$city)
+methamphetamine_2013.tidy$country <- as.factor(methamphetamine_2013.tidy$country)
+levels(methamphetamine_2013.tidy$country) <- c(BA = "Bosnia", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               DK = "Denmark", ES = "Spain", FR = "France", 
+                                               GB = "Great Britain", GF = "Greece", IT = "Italy", 
+                                               NL = "Netherlands", NO = "Norway", PT = "Portugal", 
+                                               RO = "Romania", RS = "Serbia", SE = "Sweden", 
+                                               SK = "Slovakia")
+# 2013 annual summary
+drug_2013 <- rbind(amphetamine_2013.tidy, cannabis_2013.tidy, cocaine_2013.tidy, MDMA_2013.tidy, 
+                   methamphetamine_2013.tidy)
+
+# 2014
+# amphetamine
+amphetamine_2014.tidy <- amphetamine_2014 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2014, length(amphetamine_2014$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2014$country))))
+amphetamine_2014.tidy$country <- as.factor(amphetamine_2014.tidy$country)
+levels(amphetamine_2014.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", DE = "Germany", 
+                                           ES = "Spain", FI = "Finland", FR = "France", 
+                                           GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                           IT = "Italy", NL = "Netherlands", PT = "Portugal")
+# cocaine
+cocaine_2014.tidy <- cocaine_2014 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2014, length(cocaine_2014$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2014$country))))
+cocaine_2014.tidy$country <- as.factor(cocaine_2014.tidy$country)
+levels(cocaine_2014.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", DE = "Germany", 
+                                       DK = "Denmark", ES = "Spain", FI = "Finland", 
+                                       FR = "France", GB = "Great Britain", GR = "Greece", 
+                                       HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                       NO = "Norway", PT = "Portugal")
+# MDMA
+MDMA_2014.tidy <- MDMA_2014 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2014, length(MDMA_2014$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2014$country))))
+MDMA_2014.tidy$city <- as.factor(MDMA_2014.tidy$city)
+MDMA_2014.tidy$country <- as.factor(MDMA_2014.tidy$country)
+levels(MDMA_2014.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", DE = "Germany", DK = "Denmark", 
+                                    ES = "Spain", FI = "Finland", FR = "France", GB = "Great Britain", 
+                                    GR = "Greece", HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                    NO = "Norway", PT = "Portugal")
+# methamphetamine 
+methamphetamine_2014.tidy <- methamphetamine_2014 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2014, length(methamphetamine_2014$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2014$country))))
+methamphetamine_2014.tidy$city <- as.factor(methamphetamine_2014.tidy$city)
+methamphetamine_2014.tidy$country <- as.factor(methamphetamine_2014.tidy$country)
+levels(methamphetamine_2014.tidy$country) <- c(BE = "Belgium", CH = "Switzerland", DE = "Germany", 
+                                               DK = "Denmark", ES = "Spain", FI = "Finland", 
+                                               FR = "France", GB = "Great Britain", GR = "Greece", 
+                                               HR = "Hungary", IT = "Italy", NL = "Netherlands", 
+                                               NO = "Norway", PT = "Portugal")
+# 2014 annual summary
+drug_2014 <- rbind(amphetamine_2014.tidy, cocaine_2014.tidy, MDMA_2014.tidy, methamphetamine_2014.tidy)
+
+# 2015
+# amphetamine 
+amphetamine_2015.tidy <- amphetamine_2015 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2015, length(amphetamine_2015$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2015$country))))
+amphetamine_2015.tidy$country <- as.factor(amphetamine_2015.tidy$country)
+levels(amphetamine_2015.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           DK = "Denmark", ES = "Spain", FI = "Finland", 
+                                           FR = "France", GB = "Great Britain", GR = "Greece", 
+                                           HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                           MT = "Malta", NL = "Netherlands", NO = "Norway", 
+                                           PT = "Portugal", SK = "Slovakia")
+# cocaine
+cocaine_2015.tidy <- cocaine_2015 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2015, length(cocaine_2015$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2015$country))))
+cocaine_2015.tidy$country <- as.factor(cocaine_2015.tidy$country)
+levels(cocaine_2015.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                       CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                       DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                       GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                       IS = "Iceland", IT = "Italy", MT = "Malta", NL = "Netherlands", 
+                                       NO = "Norway", PT = "Portugal", SK = "Slovakia")
+# MDMA
+MDMA_2015.tidy <- MDMA_2015 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2015, length(MDMA_2015$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2015$country))))
+MDMA_2015.tidy$country <- as.factor(MDMA_2015.tidy$country)
+levels(MDMA_2015.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", DK = "Denmark", ES = "Spain", 
+                                    FI = "Finland", FR = "France", GB = "Great Britain", GR = "Greece", 
+                                    HR = "Hungary", IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                    PT = "Portugal", SK = "Slovakia")
+# methamphetamine 
+methamphetamine_2015.tidy <- methamphetamine_2015 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2015, length(methamphetamine_2015$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2015$country))))
+methamphetamine_2015.tidy$country <- as.factor(methamphetamine_2015.tidy$country)
+levels(methamphetamine_2015.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               DK = "Denmark", ES = "Spain", FI = "Finland", 
+                                               FR = "France", GB = "Great Britain", GR = "Greece", 
+                                               HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                               MT = "Malta", NL = "Netherlands", NO = "Norway", 
+                                               PT = "Portugal", SK = "Slovakia")
+# 2015 annual summary
+drug_2015 <- rbind(amphetamine_2015.tidy, cocaine_2015.tidy, MDMA_2015.tidy, methamphetamine_2015.tidy)
+
+# 2016
+# amphetamine
+amphetamine_2016.tidy <- amphetamine_2016 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2016, length(amphetamine_2016$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2016$country))))
+amphetamine_2016.tidy$country <- as.factor(amphetamine_2016.tidy$country)
+levels(amphetamine_2016.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           ES = "Spain", FI = "Finland", FR = "France", 
+                                           GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                           IS = "Iceland", IT = "Italy", NE = "Netherlands", 
+                                           NL = "Netherlands", NO = "Norway", PT = "Portugal", 
+                                           SE = "Sweden", SK = "Slovakia")
+# cocaine 
+cocaine_2016.tidy <- cocaine_2016 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2016, length(cocaine_2016$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2016$country))))
+cocaine_2016.tidy$country <- as.factor(cocaine_2016.tidy$country)
+levels(cocaine_2016.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                       CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                       ES = "Spain", FI = "Finland", FR = "France", 
+                                       GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                       IS = "Iceland", IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                       PT = "Portugal", SE = "Sweden", SK = "Slovakia")
+# MDMA
+MDMA_2016.tidy <- MDMA_2016 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2016, length(MDMA_2016$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2016$country))))
+MDMA_2016.tidy$country <- as.factor(MDMA_2016.tidy$country)
+levels(MDMA_2016.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", ES = "Spain", FI = "Finland", 
+                                    FR = "France", GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                    IS = "Iceland", IT = "Italy", NL = "Netherlands", NO = "Norway", 
+                                    PT = "Portugal", SE = "Sweden", SK = "Slovakia")
+# methamphetamine
+methamphetamine_2016.tidy <- methamphetamine_2016 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2016, length(methamphetamine_2016$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2016$country))))
+methamphetamine_2016.tidy$country <- as.factor(methamphetamine_2016.tidy$country)
+levels(methamphetamine_2016.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               ES = "Spain", FI = "Finland", FR = "France", 
+                                               GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                               IS = "Iceland", IT = "Italy", NL = "Netherlands", 
+                                               NO = "Norway", PT = "Portugal", SE = "Sweden", 
+                                               SK = "Slovakia")
+# 2016 annual summary
+drug_2016 <- rbind(amphetamine_2016.tidy, cocaine_2016.tidy, MDMA_2016.tidy, methamphetamine_2016.tidy)
+
+# 2017
+# amphetamine
+amphetamine_2017.tidy <- amphetamine_2017 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2017, length(amphetamine_2017$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2017$country))))
+amphetamine_2017.tidy$country <- as.factor(amphetamine_2017.tidy$country)
+levels(amphetamine_2017.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           ES = "Spain", FI = "Finland", FR = "France", 
+                                           GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                           IS = "Iceland", IT = "Italy", LT = "Lithuania", 
+                                           NL = "Netherlands", NO = "Norway", PL = "Poland", 
+                                           PT = "Portugal", SI = "Slovenia", SK = "Slovakia")
+# cocaine
+cocaine_2017.tidy <- cocaine_2017 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2017, length(cocaine_2017$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2017$country))))
+cocaine_2017.tidy$country <- as.factor(cocaine_2017.tidy$country)
+levels(cocaine_2017.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                       CZ = "Czech Republic", DE = "Germany", ES = "Spain", 
+                                       FI = "Finland", FR = "France", GB = "Great Britain", 
+                                       GR = "Greece", HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                       LT = "Lithuania", NL = "Netherlands", NO = "Norway", 
+                                       PT = "Portugal", SI = "Slovenia", SK = "Slovakia")
+# MDMA
+MDMA_2017.tidy <- MDMA_2017 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2017, length(MDMA_2017$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2017$country))))
+MDMA_2017.tidy$country <- as.factor(MDMA_2017.tidy$country)
+levels(MDMA_2017.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", ES = "Spain", FI = "Finland", 
+                                    FR = "France", GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                    IS = "Iceland", IT = "Italy", LT = "Lithuania", NL = "Netherlands", 
+                                    NO = "Norway", PL = "Poland", PT = "Portugal", SI = "Slovenia", 
+                                    SK = "Slovakia")
+# methamphetamine
+methamphetamine_2017.tidy <- methamphetamine_2017 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2017, length(methamphetamine_2017$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2017$country))))
+methamphetamine_2017.tidy$country <- as.factor(methamphetamine_2017.tidy$country)
+levels(methamphetamine_2017.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               ES = "Spain", FI = "Finland", FR = "France", 
+                                               GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                               IT = "Italy", LT = "Lithuania", NL = "Netherlands", 
+                                               NO = "Norway", PL = "Poland", PT = "Portugal", 
+                                               SI = "Slovenia", SK = "Slovakia")
+# 2017 annual summary
+drug_2017 <- rbind(amphetamine_2017.tidy, cocaine_2017.tidy, MDMA_2017.tidy, methamphetamine_2017.tidy)
+
+# 2018
+# amphetamine
+amphetamine_2018.tidy <- amphetamine_2018 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2018, length(amphetamine_2018$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2018$country))))
+amphetamine_2018.tidy$country <- as.factor(amphetamine_2018.tidy$country)
+levels(amphetamine_2018.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                           GR = "Greece", HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                           LT = "Lithuania", NL = "Netherlands", NO = "Norway",  
+                                           PT = "Portugal", SI = "Slovenia", SK = "Slovakia", 
+                                           TR = "Turkey")
+# cannabis
+cannabis_2018.tidy <- cannabis_2018 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2018, length(cannabis_2018$country)))) %>%
+  mutate(drug = c(rep("cannabis", length(cannabis_2018$country))))
+cannabis_2018.tidy$country <- as.factor(cannabis_2018.tidy$country)
+levels(cannabis_2018.tidy$country) <- c(AT = "Austria", CZ = "Czech Republic", ES = "Spain", 
+                                        FR = "France", GR = "Greece", HR = "Hungary", IS = "Iceland", 
+                                        IT = "Italy", NL = "Netherlands", PT = "Portugal", 
+                                        SI = "Slovenia", SK = "Slovakia")
+# cocaine
+cocaine_2018.tidy <- cocaine_2018 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2018, length(cocaine_2018$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2018$country))))
+cocaine_2018.tidy$country <- as.factor(cocaine_2018.tidy$country)
+levels(cocaine_2018.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                       CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                       ES = "Spain", FI = "Finland", FR = "France", 
+                                       GB = "Great Britain", HR = "Hungary", IS = "Iceland", 
+                                       IT = "Italy", LT = "Lithuania", NL = "Netherlands", 
+                                       NO = "Norway", PT = "Portugal", SI = "Slovenia", 
+                                       SK = "Slovakia")
+# MDMA
+MDMA_2018.tidy <- MDMA_2018 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2018, length(MDMA_2018$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2018$country))))
+MDMA_2018.tidy$country <- as.factor(MDMA_2018.tidy$country)
+levels(MDMA_2018.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", DK = "Denmark", ES = "Spain", 
+                                    FI = "Finland", FR = "France", GR = "Greece", HR = "Hungary", 
+                                    IS = "Iceland", IT = "Italy", LT = "Lithuania", NL = "Netherlands", 
+                                    NO = "Norway", PT = "Portugal", SI = "Slovenia", SK = "Slovakia")
+# methamphetamine
+methamphetamine_2018.tidy <- methamphetamine_2018 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2018, length(methamphetamine_2018$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2018$country))))
+methamphetamine_2018.tidy$country <- as.factor(methamphetamine_2018.tidy$country)
+levels(methamphetamine_2018.tidy$country) <- c(AT = "Austria", BE = "Belgium", CY = "Cyprus", 
+                                               CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                               ES = "Spain", FI = "Finland", FR = "France", 
+                                               GB = "Great Britain", HR = "Hungary", IS = "Iceland", 
+                                               IT = "Italy", LT = "Lithuania", NL = "Netherlands", 
+                                               NO = "Norway",  PT = "Portugal", SI = "Slovenia", 
+                                               SK = "Slovakia", TR = "Turkey")
+# 2018 annual summary
+drug_2018 <- rbind(amphetamine_2018.tidy, cannabis_2018.tidy, cocaine_2018.tidy, MDMA_2018.tidy, 
+                   methamphetamine_2018.tidy)
+
+# 2019
+# amphetamine
+amphetamine_2019.tidy <- amphetamine_2019 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2019, length(amphetamine_2019$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2019$country))))
+amphetamine_2019.tidy$country <- as.factor(amphetamine_2019.tidy$country)
+levels(amphetamine_2019.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                           HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                           LT = "Lithuania", LV = "Latvia", NL = "Netherlands", 
+                                           NO = "Norway", PL = "Poland", PT = "Portugal", SE = "Sweden", 
+                                           SI = "Slovenia", TR = "Turkey")
+# cannabis
+cannabis_2019.tidy <- cannabis_2019 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2019, length(cannabis_2019$country)))) %>%
+  mutate(drug = c(rep("cannabis", length(cannabis_2019$country))))
+cannabis_2019.tidy$country <- as.factor(cannabis_2019.tidy$country)
+levels(cannabis_2019.tidy$country) <- c(AT = "Austria", CH = "Switzerland", CZ = "Czech Republic", ES = "Spain", 
+                                        FR = "France", GR = "Greece", HR = "Hungary", IS = "Iceland", 
+                                        IT = "Italy", NL = "Netherlands", PL = "Poland", PT = "Portugal", 
+                                        SE = "Sweden", SI = "Slovenia", SK = "Slovakia", TR = "Turkey")
+# cocaine
+cocaine_2019.tidy <- cocaine_2019 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2019, length(cocaine_2019$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2019$country))))
+cocaine_2019.tidy$country <- as.factor(cocaine_2019.tidy$country)
+levels(cocaine_2019.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus",
+                                       CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                       ES = "Spain", FI = "Finland", FR = "France", 
+                                       GB = "Great Britain", GR = "Greece", HR = "Hungary", IS = "Iceland", 
+                                       IT = "Italy", LT = "Lithuania", LV = "Latvia", NL = "Netherlands", 
+                                       NO = "Norway", PL = "Poland", PT = "Portugal", SE = "Sweden", 
+                                       SI = "Slovenia", SK = "Slovakia", TR = "Turkey")
+# MDMA
+MDMA_2019.tidy <- MDMA_2019 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2019, length(MDMA_2019$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2019$country))))
+MDMA_2019.tidy$country <- as.factor(MDMA_2019.tidy$country)
+levels(MDMA_2019.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", DK = "Denmark", ES = "Spain", 
+                                    FI = "Finland", FR = "France", GB = "Great Britain", GR = "Greece", 
+                                    HR = "Hungary", IS = "Iceland", IT = "Italy", LT = "Lithuania", 
+                                    LV = "Latvia", NL = "Netherlands", NO = "Norway", PL = "Poland", 
+                                    PT = "Portugal", SE = "Sweden", SI = "Slovenia", TR = "Turkey")
+# methamphetamine
+methamphetamine_2019.tidy <- methamphetamine_2019 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2019, length(methamphetamine_2019$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2019$country))))
+methamphetamine_2019.tidy$country <- as.factor(methamphetamine_2019.tidy$country)
+levels(methamphetamine_2019.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                               GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                               IS = "Iceland", IT = "Italy", LT = "Lithuania", LV = "Latvia", 
+                                               NL = "Netherlands", NO = "Norway",  PL = "Poland", PT = "Portugal", 
+                                               SE = "Sweden", SI = "Slovenia", TR = "Turkey")
+# 2019 annual summary
+drug_2019 <- rbind(amphetamine_2019.tidy, cannabis_2019.tidy, cocaine_2019.tidy, MDMA_2019.tidy, 
+                   methamphetamine_2019.tidy)
+
+# 2020
+# amphetamine
+amphetamine_2020.tidy <- amphetamine_2020 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2020, length(amphetamine_2020$country)))) %>%
+  mutate(drug = c(rep("amphetamine", length(amphetamine_2020$country))))
+amphetamine_2020.tidy$country <- as.factor(amphetamine_2020.tidy$country)
+levels(amphetamine_2020.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                           CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                           DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                           HR = "Hungary", IS = "Iceland", IT = "Italy", 
+                                           LT = "Lithuania", LV = "Latvia", NL = "Netherlands", 
+                                           NO = "Norway", PL = "Poland", PT = "Portugal", SE = "Sweden", 
+                                           SI = "Slovenia", TR = "Turkey")
+# cannabis
+cannabis_2020.tidy <- cannabis_2020 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2020, length(cannabis_2020$country)))) %>%
+  mutate(drug = c(rep("cannabis", length(cannabis_2020$country))))
+cannabis_2020.tidy$country <- as.factor(cannabis_2020.tidy$country)
+levels(cannabis_2020.tidy$country) <- c(AT = "Austria", CH = "Switzerland", CZ = "Czech Republic", ES = "Spain", 
+                                        FR = "France", GR = "Greece", HR = "Hungary", IS = "Iceland", 
+                                        IT = "Italy", NL = "Netherlands", PL = "Poland", PT = "Portugal", 
+                                        SE = "Sweden", SI = "Slovenia", SK = "Slovakia", TR = "Turkey")
+# cocaine
+cocaine_2020.tidy <- cocaine_2020 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2020, length(cocaine_2020$country)))) %>%
+  mutate(drug = c(rep("cocaine", length(cocaine_2020$country))))
+cocaine_2020.tidy$country <- as.factor(cocaine_2020.tidy$country)
+levels(cocaine_2020.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus",
+                                       CZ = "Czech Republic", DE = "Germany", DK = "Denmark", 
+                                       ES = "Spain", FI = "Finland", FR = "France", 
+                                       GB = "Great Britain", GR = "Greece", HR = "Hungary", IS = "Iceland", 
+                                       IT = "Italy", LT = "Lithuania", LV = "Latvia", NL = "Netherlands", 
+                                       NO = "Norway", PL = "Poland", PT = "Portugal", SE = "Sweden", 
+                                       SI = "Slovenia", SK = "Slovakia", TR = "Turkey")
+# MDMA
+MDMA_2020.tidy <- MDMA_2020 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2020, length(MDMA_2020$country)))) %>%
+  mutate(drug = c(rep("MDMA", length(MDMA_2020$country))))
+MDMA_2020.tidy$country <- as.factor(MDMA_2020.tidy$country)
+levels(MDMA_2020.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", CY = "Cyprus", 
+                                    CZ = "Czech Republic", DE = "Germany", DK = "Denmark", ES = "Spain", 
+                                    FI = "Finland", FR = "France", GB = "Great Britain", GR = "Greece", 
+                                    HR = "Hungary", IS = "Iceland", IT = "Italy", LT = "Lithuania", 
+                                    LV = "Latvia", NL = "Netherlands", NO = "Norway", PL = "Poland", 
+                                    PT = "Portugal", SE = "Sweden", SI = "Slovenia", TR = "Turkey")
+# methamphetamine
+methamphetamine_2020.tidy <- methamphetamine_2020 %>%
+  select(country, city, Weekday.mean) %>%
+  mutate(year = c(rep(2020, length(methamphetamine_2020$country)))) %>%
+  mutate(drug = c(rep("methamphetamine", length(methamphetamine_2020$country))))
+methamphetamine_2020.tidy$country <- as.factor(methamphetamine_2020.tidy$country)
+levels(methamphetamine_2020.tidy$country) <- c(AT = "Austria", BE = "Belgium", CH = "Switzerland", 
+                                               CY = "Cyprus", CZ = "Czech Republic", DE = "Germany", 
+                                               DK = "Denmark", ES = "Spain", FI = "Finland", FR = "France", 
+                                               GB = "Great Britain", GR = "Greece", HR = "Hungary", 
+                                               IS = "Iceland", IT = "Italy", LT = "Lithuania", LV = "Latvia", 
+                                               NL = "Netherlands", NO = "Norway",  PL = "Poland", PT = "Portugal", 
+                                               SE = "Sweden", SI = "Slovenia", TR = "Turkey")
+# 2020 annual summary
+drug_2020 <- rbind(amphetamine_2020.tidy, cannabis_2020.tidy, cocaine_2020.tidy, MDMA_2020.tidy, 
+                   methamphetamine_2020.tidy)
+
+
+# total summary
+drug <- rbind(drug_2011, drug_2012, drug_2013, drug_2014, drug_2015, drug_2016, drug_2017, drug_2018, 
+              drug_2019, drug_2020)
+
+# merge with rbind()
+drug.tidy <- drug[drug$country == "Austria" | drug$country == "Belgium" | drug$country == "Finland" | 
+               drug$country == "Germany" | drug$country == "Sweden" | drug$country == "Switzerland" | 
+               drug$country == "Spain" | drug$country == "Slovenia",]
+# subset 8 countries of interest
+
+drug.tidy$year <- as.integer(drug.tidy$year) # transform year as integer
+drug.tidy$drug <- as.factor(drug.tidy$drug) # transform drug as factor
+
+head(drug.tidy); str(drug.tidy) # check the data
+```
+
+## 5.2 Population Age Data
+Next, we tidied the **age** data. These data were already formatted to include the variables we were interested in: reference country, reference date, and **age**. However, we needed to rename these data to be consistent. Additionally, these variables were not formatted correctly: reference country should be a factor, reference date should be an integer, and **age** should be numeric (i.e. quantitative, continuous). Finally, these data also include observations that were outside the scope of the present study. 
+
+Thus, we tidied the **age** data in three steps. First, we renamed the variables; next we reformatted the data types; and finally we removed the observations outside the scope of our study.
+```{r Tidy Data: Age Data, warning=FALSE}
+# step 1: rename variables 
+raw.PctYouth.tidy <- raw.PctYouth # create dataframe
+colnames(raw.PctYouth.tidy) <- c("country", "year", "PctYouth") # fix col names
+# age = percentage of population between the ages of 15 and 24
+
+# step 2: reformat data
+raw.PctYouth.tidy$PctYouth <- as.numeric(raw.PctYouth.tidy$PctYouth) # make PctYouth numeric
+# NAs produced correspond to reference countries that we will remove (outside of scope of study)
+raw.PctYouth.tidy$year <- as.integer(raw.PctYouth.tidy$year) # make year an integer 
+raw.PctYouth.tidy$country <- as.factor(raw.PctYouth.tidy$country)
+
+# step 3: remove observations
+PctYouth <- raw.PctYouth.tidy[raw.PctYouth.tidy$country == "Austria" | raw.PctYouth.tidy$country == "Belgium" |
+                      raw.PctYouth.tidy$country == "Finland" | raw.PctYouth.tidy$country == "Germany" |
+                      raw.PctYouth.tidy$country == "Sweden" | raw.PctYouth.tidy$country == "Switzerland" |
+                      raw.PctYouth.tidy$country == "Spain" | raw.PctYouth.tidy$country == "Slovenia",]
+# subset only the 8 reference countries we're interested in
+PctYouth.tidy <- PctYouth[PctYouth$year == 2011 | PctYouth$year == 2012 | PctYouth$year == 2013 | PctYouth$year == 2014 |
+                  PctYouth$year == 2015 | PctYouth$year == 2016 | PctYouth$year == 2017 | PctYouth$year == 2018 |
+                    PctYouth$year == 2019 | PctYouth$year == 2020, ]
+# subset only the reference dates we're interested in
+
+# check the (tidied) PctYouth data
+head(PctYouth.tidy); str(PctYouth.tidy) 
+```
+
+## 5.3 GDP Data
+Then, we tidied the **GDP** data. We imported these data as a long-wise table in *Section 4.2*, and these data already included our three variables of interest: **reference country**, **reference year**, and **GDP** (2010 USD). However, these data also included a number of variables (e.g. 'Indicator.Name'), **reference years**, and **reference countries** that are outside the scope of our study. Additionally, the structure of **reference country** and **reference year** in this dataframe are incorrectly formatted as characters.
+
+Thus, we tidied the **GDP** data in three steps. First, we renamed the **GDP** columns and created a subset of our variables of interest. Next, we removed the observations that were outside the scope of our study. Finally, we reformatted the variable types. 
+```{r Tidy Data: GDP Data}
+# step 1: rename cols and subset vars of interest
+raw.gdp.temp <- na.omit(raw.gdp) #create dataframe
+colnames(raw.gdp.temp) <- c("country", "country.code", "indicator.name", "indicator.code", "year", "GDP")
+# update column names
+raw.gdp.tidy <- raw.gdp.temp %>% select(country, year, GDP)
+# subset country, year, GDP
+
+# step 2: remove observations
+gdp <- raw.gdp.tidy[raw.gdp.tidy$country == "Austria" | raw.gdp.tidy$country == "Belgium" | 
+                     raw.gdp.tidy$country == "Finland" | raw.gdp.tidy$country == "Germany" |
+                     raw.gdp.tidy$country == "Sweden" | raw.gdp.tidy$country == "Switzerland" |
+                     raw.gdp.tidy$country == "Spain" | raw.gdp.tidy$country == "Slovenia",]
+# use logical statements to subset 8 countries from sampling frame
+gdp.tidy <- as.data.frame(gdp[gdp$year == "X2011" | gdp$year == "X2012" | gdp$year == "X2013" | gdp$year == "X2014" |
+                  gdp$year == "X2015" | gdp$year == "X2016" |
+                    gdp$year == "X2017" | gdp$year == "X2018" |
+                    gdp$year == "X2019" | gdp$year == "X2020",])
+# use logical statements to subset 8 years from sampling frame 
+gdp.tidy$year <- as.factor(gdp.tidy$year) # transform year to factor to fix formatting of values
+levels(gdp.tidy$year) <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 
+                           2018, 2019, 2020) # redefine values
+gdp.tidy$year <- as.integer(gdp.tidy$year) # transform back to integer
+gdp.tidy["year"] <- gdp.tidy$year + 2010 # add 2010 to fix misread values
+
+# step 3: reformat vars
+gdp.tidy$country <- as.factor(gdp.tidy$country) 
+# transform country to factor
+gdp.tidy$year <- as.integer(gdp.tidy$year)
+# transform year to integer
+
+# check the data
+head(gdp.tidy); str(gdp.tidy) 
+```
+
+## 5.4 Assembling the Data
+Finally, the last step of tidying the data was to merge the three variables we tidied -- **drug usage**, **PctYouth**, and **GDP** -- into a single dataframe. Since each dataframe included information about the **reference country** and **reference year** corresponding to each observation, we merged the dataframes by a combination of **reference country** and **reference year** (i.e. we will match values of **age**, **GDP**, and **drug usage** from each of the respective dataframes by the variables **reference country** and **reference year**). 
+```{r Tidy Data: Asemble the Data -- Merge Variables}
+data.temp <- (left_join(y = PctYouth.tidy, x = drug.tidy, by = c('country', 'year'))) 
+# merge 1: age and drug usage data
+data <- (left_join(y = gdp.tidy, x = data.temp, by = c('country', 'year'))) 
+# merge 2: result of merge 1 and GDP data
+
+head(data); str(data) # check the data
+```
+
+# 6.0 Data Exploration
+In the last section, we tidied our data so that it was properly formatted for analysis. Before we proceed with our analysis, it was important to first look at the distributions of variables in our data and to examine the relationships that existed between our variables. Our analysis is centered around an linear model to predict differences in the weekday mean **drug usage** estimates between **reference countries**, given population age and wealth demographics. Accordingly, we must ensure that **drug usage**, **PctYouth**, and **GDP** conform to the assumptions of a linear model. Therefore, the following assumptions must be met:
+
+|No.  |Assumption                           |Section|
+|:----|:------------------------------------|:------|
+|1.|Model is appropriate (i.e. **drug usage**~**PctYouth** and **drug usage**~**GDP** are approximately linear).|*Section 6.1*|
+|2.|Normal distribution of residuals.|*Section 6.2*| 
+|3.|Homogeneity of variance across values of y hat (i.e. model predicted **drug use** estimates).|*Section 6.3*|
+|4.|No major outliers.|*Section 6.4*|
+
+In the following section, each of these assumptions of the model are assessed in individual subsections, starting with assumption no. 1. In the fifth and final subsection (*Section 6.5*), I will ensure that our data are prepared for analysis. 
+
+## 6.1 Fit of the Model
+First, we must ensure that the model fit is appropriate for our data. In other words, we want to ensure that population age (i.e. **PctYouth**) and wealth (i.e. **GDP**) demographics are linearly related to weekday mean **drug usage**. We do this using a pair of scatterplots below, shown for **PctYouth** first (*Figure 6.1a*) and **GDP** second (*Figure 6.1b*). For each scatterplot, the line shown represents the least-squares mean regression (LSMR) line of best fit for the data, and the grey area around the line of best fit represents the corresponding 95% confidence interval. From the scatterplots and regression lines constructed, it appears that a linear relationship is not appropriate for describing the relationship between **drug usage** and either **PctYouth** or **GDP**. 
+```{r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
+ggplot(data = data, aes(x = PctYouth, y = Weekday.mean)) +
+  geom_point() + # scatter
+  geom_smooth(method = "lm", color = "black") + #LSMR line
+  labs(title = "Figure 6.1a", # add labels
+       x = "Population Aged 15-24 (Percent)", 
+       y = "Drug Usage (mg/1000 people/day)") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+
+ggplot(data = data, aes(x = GDP, y = Weekday.mean)) +
+  geom_point() + # scatter
+  geom_smooth(method = "lm", color = "black") + # LSMR line
+  labs(title = "Figure 6.1b", # add labels
+       x = "GDP (USD)", 
+       y = "Drug Usage (mg/1000 people/day)") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+```
+
+However, transforming our data may be sufficient to satisfy the condition of appropriate model fit. To explore our options, we examine the effect of a natural log transformation of **drug usage** and **GDP**. Note that for **drug usage**, a vertical translation (10 units) is applied before the log transformation to avoid dividing by 0. As shown in *Section 6.4*, we chose to transform these variables specifically because they are right-skewed. Again, a pair of scatterplots is shown below, representing a plot of log-transformed **drug usage** by **PctYouth** (*Figure 6.1c*) and a plot of log-transformed **drug usage** by log-transformed **GDP** (*Figure 6.1d*). Again, the LSMR line of best fit, and the corresponding 95% confidence interval, are shown for each plot. As shown below, linear relationships better represent these data following these transformations. Accordingly, we will continue our analysis with the log-transformed versions of **drug usage** and **GDP** (i.e. **log(drug use)** and **log(GDP)**). 
+```{r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
+ggplot(data = data, aes(x = PctYouth, y = log(10 + Weekday.mean))) +
+  geom_point() + # scatter
+  geom_smooth(method = "lm", color = "black") + #LSMR line
+  labs(title = "Figure 6.1c", # add labels
+       x = "Population Aged 15-24 (Percent)", 
+       y = "Drug Usage (mg/1000 people/day)") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+
+ggplot(data = data, aes(x = log(GDP), y = log(10+ Weekday.mean))) +
+  geom_point() + # scatter
+  geom_smooth(method = "lm", color = "black") + # LSMR line
+  labs(title = "Figure 6.1d", # add labels
+       x = "GDP (USD)", 
+       y = "Drug Usage (mg/1000 people/day)") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+
+Z <- data$Weekday.mean+10
+temp <- log(10 + data$Weekday.mean)
+data["log.Weekday.mean"] <- temp
+data$log.Weekday.mean[is.na(data$log.Weekday.mean)] <- 0
+
+Y <- data$GDP
+temp2 <- log(data$GDP)
+data["log.GDP"] <- temp2
+data$log.GDP[is.na(data$log.GDP)] <- 0
+```
+
+## 6.2 Normality of Resiuduals
+Next, we need to assess the normality of residuals produced by the relationships between **log(Drug Usage)** and **PctYouth** (*Figure 6.2a*), and between **log(Drug Usage)** and **log(GDP)** (*Figure 6.2b*). We can do this using two qqplots, corresponding to each of the explanatory variables. As shown below, these plots suggest that the residuals are approximately normally distributed for both of these relationships. Therefore, these plots suggest that the assumption of normality of residuals is met. 
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+mod1 <- lm(log.Weekday.mean~PctYouth,data=data)
+fig6.2a <- autoplot(mod1, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
+fig6.2a@plots[[2]] + ggtitle("Figure 6.2a") + theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+
+mod2 <- lm(log.Weekday.mean~log.GDP,data=data)
+fig6.2b <- autoplot(mod2, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+fig6.2b@plots[[2]] + ggtitle("Figure 6.2b") + theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+```
+
+## 6.3 Homogeneity of Variance 
+Next, we must asses the homogeneity of variance across the model predicted **drug use** estimates, according to both **PctYouth** (*Figure 6.3 a*) and **log(GDP)** (*Figure 6.3b*). To do this, we assess the scale-location plots corresponding to each of these relationships. As shown below, these plots suggest that both relationships approximately conform to the homogeneity of variance.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+fig6.3a <- autoplot(mod1, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
+fig6.3a@plots[[3]] + ggtitle("Figure 6.3a") + theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+
+fig6.3b <- autoplot(mod2, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+fig6.3b@plots[[3]] + ggtitle("Figure 6.3b") + theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=18))
+```
+
+## 6.4 Potential Outliers
+To sastisfy the final condition of a linear model, we must assess any potential outliers in the data. To do this, we consider trios of boxplots for each of **log(drug use)**, **Pct Youth**, and **log(GDP)**. For each variable, one boxplot will represent the distribution of the data, one boxplot will represent the distribution of the data by **reference country**, and one boxplot will represent the distribution of the data by **reference drug**. 
+
+First, we examine the distributions of **log(drug use)**. **log(drug use)** is presented in *Figure 6.4a*, **log(drug use)** ~ **reference country** is presented in *Figure 6.4b*, and **log(drug use)** ~ **reference drug** is presented in *Figure 6.4c*. As shown in *Figure 6.4a*, there are no potential outliers identified in the boxplot of **log(drug use)**. Although several potential outliers are highlighted in the below plots with open circles, these points are relatively few in number and small in magnitude when compared to distributions of the **drug use** data before the log-transformation (*Appendix E*). Thus, these plots suggest the assumption is met for the **log(drug use)** data.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+boxplot(data$log.Weekday.mean, col = NULL, main = "Figure 6.1d", 
+        ylab = "Drug Usage (log(mg/1000 people/day))", range = 1.5) 
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+bwplot(data$log.Weekday.mean~data$country, strip = strip.custom(bg = 'white'),   
+       cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
+       main = "Figure 6.1e",
+       xlab = "Reference Country", ylab = "Drug Usage (log(mg/1000 people/day))",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+
+bwplot(data$log.Weekday.mean~data$drug, strip = strip.custom(bg = 'white'),   
+       cex = .5, layout = c(1, 1),
+       main = "Figure 6.1f",
+       xlab = "Reference Drug", ylab = "Drug Usage (log(mg/1000 people/day))",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+```
+
+Next, we examine the distributions of **PctYouth**. **PctYouth** is presented in *Figure 6.4d*, **PctYouth** ~ **reference country** is presented in *Figure 6.4e*, and **PctYouth** ~ **reference drug** is presented in *Figure 6.4f*. As shown in *Figure 6.4d*, there is one potential outliers identified in the boxplot of **PctYouth**. Again, these potential outliers are highlighted with open circles, and these points are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **PctYouth** data.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+boxplot(data$PctYouth, col = NULL, main = "Figure 6.2a", 
+        ylab = "Population Aged 15-24 (Percent)", range = 1.5) 
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+bwplot(data$PctYouth~data$country, strip = strip.custom(bg = 'white'),   
+       cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
+       main = "Figure 6.2b",
+       xlab = "Reference Country", ylab = "Population Aged 15-24 (Percent)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+
+bwplot(data$PctYouth~data$drug, strip = strip.custom(bg = 'white'),   
+       cex = .5, layout = c(1, 1),
+       main = "Figure 6.2c",
+       xlab = "Reference Drug", ylab = "Population Aged 15-24 (Percent)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+```
+
+Finally, we assess the normality of **log(GDP)**. **log(GDP)** is presented in *Figure 6.4g*, **log(GDP)** ~ **reference country** is presented in *Figure 6.4h*, and **log(GDP)** ~ **reference drug** is presented in *Figure 6.4i*. As shown in *Figure 6.4g*, there are no potential outliers identified in the boxplot of **PctYouth**. Potential outliers shown in *Figure 6.4h* and *Figure 6.4i*, highlighted with open circles, are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **log(GDP)** data.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+boxplot(data$log.GDP, col = NULL, main = "Figure 6.3d", 
+        ylab = "GDP (log(USD))", range = 1.5) 
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+bwplot(data$log.GDP~data$country, strip = strip.custom(bg = 'white'),   
+       cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
+       main = "Figure 6.3e",
+       xlab = "Reference Country", ylab = "GDP (log(USD))",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+
+bwplot(data$log.GDP~data$drug, strip = strip.custom(bg = 'white'),   
+       cex = .5, layout = c(1, 1),
+       main = "Figure 6.3f",
+       xlab = "Reference Drug", ylab = "GDP (log(USD))",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same")))  
+```
+
+## 6.5 Prepare for Analysis
+Thus, the above subsections suggest that the assumptions are met to construct a linear model of **log(drug usage)** by **PctYouth** and **log(GDP)**. In the following subsection, we finalize the data for analysis. 
+```{r}
+data <- data %>% select(-Weekday.mean, -GDP) # remove non-transformed variables
+
+head(data); str(data) # check data
+```
+
+# 7.0 Drug Metabolite Analyses
+In the following section, we proceeded with our analyses to test our hypothesis that the effect of **country** on **drug usage** is a function of **age** and **GDP**. We do so by following the Plot -> Model -> Check Assumptions -> Interpret -> Plot Again workflow outlined in Beckerman et al. (2017).
+
+## 7.1 Cocaine
+First, we look at **cocaine** usage.
+
+### 7.1.1 Organize Data
+To perform this analysis, we created a subset of only the **cocaine** data in a new dataframe called cocaineplot.
+```{r Cocaine}
+#Create new dataframe containing only data pertaining to cocaine
+cocaineplot <- data %>% 
+  filter(drug == "cocaine") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP)
+
+#check data
+glimpse(cocaineplot)
+```
+
+### 7.1.2 Summary Statistics
+Here are the summary statistics (mean, sample size, and standard error by country) for the **cocaine** data.
+```{r}
+#Create dataframe with mean cocaine levels, sample size, and standard error by country
+plot2 <- cocaineplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot2
+```
+
+### 7.1.3 Plot
+Here, the **log(drug)**, **PctYouth**, and **log(GDP)** data associated with *cocaine* are presented as simple point plots.
+
+For the first plot of **reference country** vs *cocaine* consumption, Finland appears to consume the least amount of *cocaine* while Belgium appears to consume the most. The **PctYouth** vs *cocaine* consumption plot appears to show a negative relationship between **PctYouth** and *cocaine* consumption. The **log(GDP)** vs *cocaine* plot does not appear to show any relationship. 
+```{r}
+#Plot our cocaine data by country
+ggplot(data = cocaineplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("Cocaine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Cocaine Consumed by European Country") +
+  theme_bw()
+
+#Plot our cocaine data by age
+ggplot(data = cocaineplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Cocaine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Cocaine Consumed vs Percent Youth") +
+  theme_classic()
+
+#Plot our cocaine data by GDP
+ggplot(data = cocaineplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP (log(USD))") +
+  ylab("Cocaine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Cocaine Consumed vs GDP") +
+  theme_classic()
+```
+
+### 7.1.4 Model
+Here we fit a linear model, where we hypothesize that the effect of **reference country** on *cocaine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the cocaineplot data frame. To address our hypothesis, we are particularly interested the interaction effects  **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+cocmod <- lm(data = cocaineplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
+```
+
+### 7.1.5 Check Assumptions
+Before we can run the linear model with **cocaine** data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (top right), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for **cocaine**.
+```{r}
+#Check assumptions
+autoplot(cocmod, smooth.colour = NA)
+```
+
+### 7.1.6 Interpret
+Here, we produce an ANOVA table and summary table to help interpret our model. 
+
+First looking at the ANOVA table produced below, most of the variation in **cocaine** usage is explained by **reference country** (Mean sq value of 52.613), and some variation is also explained by **PctYouth** (Mean sq value of 7.349), **log(GDP)** (Mean sq value of 8.156), the interaction between **country** and **PctYouth** (Mean sq value of 3.970), and the interaction between **country** and **log(GDP)** (Mean sq value of 1.849).
+
+Results from the ANOVA table suggest that there is a significant difference in **cocaine** consumption among the European countries examined in this study, with Switzerland consuming the most **cocaine** and Finland consuming the least (F=106.7, df=7, p<0.05). **PctYouth** also had a significant effect on **cocaine** consumption, with a lower proportion of youth in the population being associated with higher amounts of **cocaine** usage (F=11.3, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on **cocaine** usage is a function of **PctYouth** and **GDP** was not supported.
+ 
+```{r}
+#Generate ANOVA table and summary
+anova(cocmod)
+summary(cocmod)
+```
+
+
+### 7.1.7 Plot Again
+Here we replot our cocaine data using predicted values from our linear model
+```{r}
+# Plot by country first
+# Make new x values with unique country values, and mean age and GDP (standardizes it)
+new.x1 <- expand.grid( 
+  country = unique(cocaineplot$country),
+  PctYouth = mean(cocaineplot$PctYouth),
+  log.GDP = mean(cocaineplot$log.GDP))
+
+#New y values predicted from the model
+new.y1 <- predict(cocmod, newdata = new.x1, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese1
+addThese1 <- data.frame(new.x1, new.y1)
+
+#Plot country by cocaine consumption using predicted values
+ggplot(data = addThese1, aes(x = country, y = fit)) +
+  geom_point(size = 4) +
+  geom_errorbar(data = addThese1, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
+  xlab("Country") +
+  ylab("Mean Log Cocaine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean Cocaine Consumed by European Country") +
+  theme_bw()
+
+
+#Now do the same with age
+#Make new x values
+new.x2 <- expand.grid( 
+  country = unique(cocaineplot$country),
+  PctYouth = seq(from=min(cocaineplot$PctYouth), to=max(cocaineplot$PctYouth) +1),
+  log.GDP = mean(cocaineplot$log.GDP))
+
+#New y values predicted from the model
+new.y2 <- predict(cocmod, newdata = new.x2, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese2
+addThese2 <- data.frame(new.x2, new.y2)
+
+#Plot age vs cocaine consumption including countries
+ggplot(data = addThese2, aes(x = PctYouth, y = fit, group = country, color = country)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Mean Cocaine Consumed (log mg/1000 people/day)") +
+  ggtitle("Mean Cocaine Consumed vs Percent Youth") +
+  theme_classic()
+```
+
+## 7.2 Amphetamines
+Next, we looked at *amphetamine* usage.
+
+### 7.2.1 Organize Data
+To perform this analysis, we created a subset of only the *amphetamine* data in a new dataframe called amphetplot.
+```{r Amphetamines}
+
+#Create new dataframe containing only data pertaining to amphetamine
+amphetplot <- data %>% 
+  filter(drug == "amphetamine") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP) 
+
+#check data
+glimpse(amphetplot)
+```
+
+### 7.2.2 Summary Statistics
+Here are the summary statistics (mean, sample size, and standard error by country) for the *amphetamine* data.
+```{r}
+#Create dataframe with mean amphetamine levels, sample size, and standard error by country
+plot3 <- amphetplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot3
+```
+
+### 7.2.3 Plot
+Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *amphetamine* are presented as simple point plots.
+
+For the first plot of **reference country** vs *amphetamine* consumption, Austria appears to consume the least amount of *amphetamine*, while Belgium and Germany appear to consume the  most. The **PctYouth** vs *amphetamine* consumption plot appears to show a positive relationship between **PctYouth** and *amphetamine* consumption. The **log(GDP)** vs *amphetamine* plot does not appear to show any relationship. 
+```{r}
+#Plot amphetamine data by country
+ggplot(data = amphetplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("Amphetamine Consumed (log (mg/1000 people/day))") +
+  ggtitle("Amphetamine Consumed by European Country") +
+  theme_bw()
+
+#Plot amphetamine data by age
+ggplot(data = amphetplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Amphetamine Consumed vs Percent Youth") +
+  theme_classic()
+
+#Plot amphetamine data by GDP
+ggplot(data = amphetplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP(log(USD))") +
+  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Amphetamine Consumed vs GDP") +
+  theme_classic()
+```
+
+### 7.2.4 Model
+Here we fit a linear model, where we hypothesize that the effect of country on *amphetamine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the amphetplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **Pct Youth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+ampmod <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
+```
+
+
+### 7.2.5 Check Assumptions
+Before we can run the linear model with *amphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (top right), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *amphetamine*.
+```{r}
+#Check assumptions
+autoplot(ampmod, smooth.colour = NA)
+```
+
+### 7.2.6 Interpret
+Here, we produce an ANOVA table and summary table to help interpret our model. 
+
+First looking at the ANOVA table produced below, most of the variation in *amphetamine* usage is explained by **reference country** (Mean sq value of 10.98), and some variation is also explained by **PctYouth** (Mean sq value of 2.54). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following subsection.
+```{r}
+#Generate ANOVA table and summary
+anova(ampmod)
+summary(ampmod)
+```
+
+
+##### 7.2.6.1 Simplified Model
+Here we simplify our model to exclude GDP and the variable interactions.
+
+Results from the ANOVA table produced below suggest that there is a significant difference in *amphetamine* consumption among the European countries examined in this study, with Belgium consuming the most *amphetamine* and Spain consuming the least (F=23.2, df=7, p<0.05). Age also had a significant effect on *amphetamine* consumption, with a lower proportion of youth in the population being associated with higher amounts of *amphetamine* usage (F=5.36, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *amphetamine* usage is a function of **PctYouth** and **GDP** was not supported.
+```{r}
+#Recreate model without GDP and interaction terms
+ampmod2 <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth)
+
+#Generate ANOVA table
+anova(ampmod2)
+
+#Generate summary
+summary(ampmod2)
+```
+
+
+### 7.2.7 Replot
+Here we replot our amphetamine data using predicted values from our linear model
+```{r}
+# Plot by country first
+# Make new x values with unique country values, and mean age and GDP (standardizes it)
+new.x3 <- expand.grid( 
+  country = unique(amphetplot$country),
+  PctYouth = mean(amphetplot$PctYouth),
+  log.GDP = mean(amphetplot$log.GDP))
+
+#New y values predicted from the model
+new.y3 <- predict(ampmod2, newdata = new.x3, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese3
+addThese3 <- data.frame(new.x3, new.y3)
+
+#Plot amphetamine consumption by country using predicted values
+ggplot(data = addThese3, aes(x = country, y = fit)) +
+  geom_point(size = 4) +
+  geom_errorbar(data = addThese3, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
+  xlab("Country") +
+  ylab("Mean Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean Amphetamine Consumed by European Country") +
+  theme_bw()
+
+
+#Now do the same with age
+#Make new x values
+new.x4 <- expand.grid( 
+  country = unique(amphetplot$country),
+  PctYouth = seq(from=min(amphetplot$PctYouth), to=max(amphetplot$PctYouth) +1),
+  log.GDP = mean(amphetplot$log.GDP))
+
+#New y values predicted from the model
+new.y4 <- predict(ampmod2, newdata = new.x4, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese2
+addThese4 <- data.frame(new.x4, new.y4)
+
+#Plot age vs cocaine consumption including countries
+ggplot(data = addThese4, aes(x = PctYouth, y = fit, group = country, color = country)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Mean Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean Amphetamine Consumed vs Percent Youth") +
+  theme_classic()
+```
+
+## 7.3 Methamphetamines
+Next, we looked at *methamphetamine* usage.
+
+### 7.3.1 Organize Data
+To perform this analysis, we created a subset of only the *methamphetamine* usage data in a new dataframe called methplot.
+```{r Methamphetamines}
+#Create new dataframe containing only data pertaining to methamphetamine
+methplot <- data %>% 
+  filter(drug == "methamphetamine") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP) 
+
+#Check data
+glimpse(methplot)
+```
+
+### 7.3.2 Summary Statistics
+Here are the summary statistics (mean, sample size, and standard error by country) for the **methamphetamine** data.
+```{r}
+#Create table with mean methamphetamine levels, sample size, and standard error by country
+plot4 <- methplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot4
+```
+
+### 7.3.3 Plot
+Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *methamphetamine* are presented as simple point plots.
+
+For the first plot of **reference country** vs *methamphetamine* consumption, Austria appears to consume the least amount of *methamphetamine*, while Germany appears to consume the  most. The **PctYouth** vs *methamphetamine* consumption plot does not appear to show any relationship. The **log(GDP)** vs *methamphetamine* plot looks like there may be a positive relationship between **log.(GDP)** and **methamphetamine** consumption. 
+```{r}
+#Plot methamphetamine data by country
+ggplot(data = methplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Methamphetamine Consumed by European Country") +
+  theme_bw()
+
+#Plot methamphetamine data by age
+ggplot(data = methplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Methamphetamine Consumed vs Percent Youth") +
+  theme_classic()
+
+#Plot methamphetamine data by GDP
+ggplot(data = methplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP (log(USD))") +
+  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Methamphetamine Consumed vs log GDP") +
+  theme_classic()
+```
+
+### 7.3.4 Model
+Here we fit a linear model, where we hypothesize that the effect of country on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the methplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+methmod <- lm(data = methplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
+```
+
+### 7.3.5 Check Assumptions
+Before we can run the linear model with *methamphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (top right) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *methamphetamine*.
+```{r}
+#Check assumptions
+autoplot(methmod, smooth.colour = NA)
+```
+
+### 7.3.6 Interpret
+Here, we produce an ANOVA table and summary table to help interpret our model. 
+
+First looking at the ANOVA table produced below, most of the variation in *methamphetamine* usage is explained by **reference country** (Mean sq value of 2.40). While **log(GDP)**, **PctYouth**, and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)**, **PctYouth** and the interaction terms in the following section.
+
+```{r}
+#Generate ANOVA table and summary
+anova(methmod)
+summary(methmod)
+```
+
+#### 7.3.6.1 Simplify Model
+Here we simplify our model to exclude, **PctYouth**, **log(GDP)**, and all variable interactions. 
+
+Results from the ANOVA table produced below suggest that there is a significant difference in *methamphetamine* consumption among the European countries examined in this study, with Germany consuming the most *methamphetamine* and Slovenia consuming the least (F=4.98, df=7, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)** was not supported.
+
+```{r}
+#Recreate model without GDP, age, and interaction terms
+methmod2 <- lm(data = methplot, log.Weekday.mean ~ country)
+
+#Generate ANOVA table
+anova(methmod2)
+
+#Generate summary
+summary(methmod2)
+```
+
+### 7.3.7 Replot
+Here we replot our *methamphetamine* data using predicted values from our linear model
+```{r}
+# Plot by country first
+# Make new x values with unique country values, and mean age and GDP (standardizes it)
+new.x5 <- expand.grid( 
+  country = unique(methplot$country),
+  PctYouth = mean(methplot$PctYouth),
+  log.GDP = mean(methplot$log.GDP))
+
+#New y values predicted from the model
+new.y5 <- predict(methmod2, newdata = new.x5, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese5
+addThese5 <- data.frame(new.x5, new.y5)
+
+#Plot amphetamine consumption by country using predicted values
+ggplot(data = addThese5, aes(x = country, y = fit)) +
+  geom_point(size = 4) +
+  geom_errorbar(data = addThese5, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
+  xlab("Country") +
+  ylab("Mean Methmphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean Methamphetamine Consumed by European Country") +
+  theme_bw()
+```
+
+
+## 7.4 MDMA
+Lastly, we investigated *MDMA* usage. 
+
+### 7.4.1 Organize Data
+To perform this analysis, we created a subset of the *MDMA* data in a new dataframe called MDMAplot.
+```{r MDMA}
+#Create new dataframe containing only data pertaining to MDMA
+MDMAplot <- data %>%
+  filter(drug == "MDMA") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP)
+
+#Check data
+glimpse(MDMAplot)
+```
+
+### 7.4.2 Summary Statistics
+Here are the summary statistics (mean, sample size, and standard error by country) for the *MDMA* data.
+```{r}
+#Create dataframe with mean MDMA levels, sample size, and standard error by country
+plot5 <- MDMAplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot5
+```
+
+### 7.4.3 Plot
+Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *MDMA* are presented as simple point plots.
+
+For the first plot of **reference country** vs *MDMA* consumption, Sweden appears to consume the least amount of *MDMA* while Belgium appears to consume the  most. The **PctYouth** vs *MDMA* consumption plot does not appear to show any relationship, and neither does the **log(GDP)** vs *MDMA* plot.
+```{r}
+#Plot MDMA data by country
+ggplot(data = MDMAplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("MDMA Consumed (log(mg/1000 people/day))") +
+  ggtitle("MDMA Consumed by European Country") +
+  theme_bw()
+
+#Plot MDMA data by age
+ggplot(data = MDMAplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("MDMA consumed (log(mg/1000 people/day))") +
+  ggtitle("MDMA Consumed vs Percent Youth") +
+  theme_classic()
+
+#Plot MDMA data by GDP
+ggplot(data = MDMAplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP (log(USD))") +
+  ylab("MDMA consumed (log(mg/1000 people/day))") +
+  ggtitle("MDMA Consumed vs GDP") +
+  theme_classic()
+```
+
+### 7.4.4 Model
+Here we fit a linear model, where we hypothesize that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **GDP**, using the variables from the MDMAplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+mdmamod <- lm(data = MDMAplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
+```
+
+### 7.4.5 Check Assumptions
+Before we can run the linear model with *MDMA* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (top right) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *MDMA*.
+```{r}
+#Check assumptions
+autoplot(mdmamod, smooth.colour = NA)
+```
+
+### 7.4.6 Interpret
+Here, we produce an ANOVA table and summary table to help interpret our model. 
+
+First looking at the ANOVA table produced below, most of the variation in *MDMA* usage is explained by **PctYouth** (Mean sq value of 1.68). Some variation is also explained by **reference country** (Mean sq of 0.62). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following section.
+```{r}
+#Generate ANOVA table and summary
+anova(mdmamod)
+summary(mdmamod)
+```
+
+#### 7.4.6.1 Simplify Model
+Here we simplify our model to exclude **log(GDP)** and the interaction terms.
+
+Results from the ANOVA table produced below suggest that there is a significant difference in *MDMA* consumption among the European countries examined in this study, with Belgium consuming the most *MDMA* and Slovenia consuming the least (F=4.09, df=7, p<0.05). Age also had a significant effect on *MDMA* consumption, with a lower proportion of youth in the population being associated with higher amounts of *MDMA* usage (F=11.1, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **log(GDP)** was not supported.
+```{r}
+#Recreate model without GDP, age, and interaction terms
+MDMAmod2 <- lm(data = MDMAplot, log.Weekday.mean ~ country + PctYouth)
+
+#Generate ANOVA table
+anova(MDMAmod2)
+
+#Generate summary
+summary(MDMAmod2)
+```
+
+### 7.4.7 Replot
+Here we replot our *MDMA* data using predicted values from our linear model
+```{r}
+# Plot by country first
+# Make new x values with unique country values, and mean age and GDP (standardizes it)
+new.x6 <- expand.grid( 
+  country = unique(MDMAplot$country),
+  PctYouth = mean(MDMAplot$PctYouth),
+  log.GDP = mean(MDMAplot$log.GDP))
+
+#New y values predicted from the model
+new.y6 <- predict(MDMAmod2, newdata = new.x6, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese6
+addThese6 <- data.frame(new.x6, new.y6)
+
+#Plot MDMA consumption by country using predicted values
+ggplot(data = addThese6, aes(x = country, y = fit)) +
+  geom_point(size = 4) +
+  geom_errorbar(data = addThese6, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
+  xlab("Country") +
+  ylab("Mean MDMA Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean MDMA Consumed by European Country") +
+  theme_bw()
+
+
+#Now do the same with age
+#Make new x values
+new.x7 <- expand.grid( 
+  country = unique(MDMAplot$country),
+  PctYouth = seq(from=min(MDMAplot$PctYouth), to=max(MDMAplot$PctYouth) +1),
+  log.GDP = mean(MDMAplot$log.GDP))
+
+#New y values predicted from the model
+new.y7 <- predict(MDMAmod2, newdata = new.x7, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese7
+addThese7 <- data.frame(new.x7, new.y7)
+
+#Plot age vs cocaine consumption including countries
+ggplot(data = addThese7, aes(x = PctYouth, y = fit, group = country, color = country)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Mean MDMA Consumed (log(mg/1000 people/day))") +
+  ggtitle("Mean MDMA Consumed vs Percent Youth") +
+  theme_classic()
+```
