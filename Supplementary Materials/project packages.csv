@@ -1,0 +1,10 @@
+Package,Description,Link
+ggplot2,Data visualization package,https://cran.r-project.org/web/packages/ggplot2/index.html
+dplyr,Data tidying package,https://cran.r-project.org/web/packages/dplyr/index.html
+ggfortify,Data visualization package,https://cran.r-project.org/web/packages/ggfortify/index.html
+readr,Data tidying package,https://cran.r-project.org/web/packages/readr/index.html
+tidyr,Data tidying package,https://cran.r-project.org/web/packages/tidyr/index.html
+stringr,Data tidying package,https://cran.r-project.org/web/packages/stringr/index.html
+lubridate,Data tidying package,https://cran.r-project.org/web/packages/lubridate/index.html
+plotrix,Data visualization package,https://cran.r-project.org/web/packages/plotrix/index.html
+lattice,Data visualization package,https://cran.r-project.org/web/packages/lattice/index.html
