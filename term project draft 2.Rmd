@@ -1,7 +1,7 @@
 ---
-title: "Term Project Draft 2"
+title: "Investigating drug usage across European countries as a factor of age and GDP using wastewater metabolite data"
 author: "Trevor Pettit, Scout Thompson, Jake Simanek & Peter Baker"
-date: "11/10/2021"
+date: "December 6, 2021"
 output: 
   html_document:
     code_folding: hide
@@ -16,15 +16,32 @@ output:
 ## 1.1 Introduction
 Initially used to track and contain disease outbreaks in the 1940s (Metcalf et al., 1995), wastewater analysis has quickly gained traction as a way to monitor other public health measures such as the usage of illicit drugs (Zuccato et al., 2008). Wastewater based epidemiology (WBE) is a chemical analysis technique used to detect a myriad of compounds for regions serviced by wastewater treatment facilities. The functions of this technique range from monitoring environmental impact of household liquid waste to the very topical application of detecting the presence of Covid-19 (Glassmeyer et al., 2005), (Bentacourt et al., 2021).Following the consumption of illicit drugs, the body enzymatically breaks them down into by-products known as drug metabolites. As the process of metabolizing drugs is the same within all humans, the type and quantity of  produced metabolites is already known (Concheiro et al., 2007). With this knowledge, scientists are able to estimate the **quantity of drugs consumed (drug usage)** within a community by measuring the metabolites within the local wastewater (Zuccato et al., 2008). Estimating the use of illicit drugs within a community is a crucial public health matter due to the known harms that regular consumption can cause (Bannwarth et al., 2019). This information can be used to help direct policies and distribute resources to communities in need. 
 
-The following analysis is based off a wastewater analysis study which estimated the **drug usage** of *amphetamines*, *cannabis*, *cocaine*, *3,4-Methylenedioxymethamphetamine (MDMA)*, and *methamphetamine* within 137 cities across 29 European countries between 2011 and 2020 (EMCDDA, 2021). In our analysis, we sought to test whether **drug usage** varies between countries. Previous research suggests that **drug usage** is related to population-level age demographics; self-reported drug usage tends to be greatest in youth populations (Health Canada, 2010). Consistent with the definition of youth used by the European Monitoring Centre for Drugs and Drug Addiction (EMCDDA), we chose to define youth as those aged 15 to 24. Accordingly, we hypothesized that differences in the **relative proportion of youth (expressed as a percentage, PctYouth)** would explain differences in **drug usage** between countries. Previous research also suggests that **drug usage** is related to population-level wealth demographics (Lipari and Park-Lee, 2019). We chose **GDP** as a measure of population wealth because it is widely referenced and compared in the literature (Nagelhout et al., 2017). Accordingly, we hypothesized that differences in **Gross Domestic Product (GDP)** would also explain differences in **drug usage** between countries.
+The following analysis is based off a wastewater analysis study which estimated the **drug usage** of *amphetamines*, *cannabis*, *cocaine*, *3,4-Methylenedioxymethamphetamine (MDMA)*, and *methamphetamine* within 137 cities across 29 European countries between 2011 and 2020 (EMCDDA, 2021). In our analysis, we sought to test whether **drug usage** varies between countries. Previous research suggests that **drug usage** is related to population-level age demographics; self-reported drug usage tends to be greatest in youth populations (Health Canada, 2010). Consistent with the definition of youth used by the European Monitoring Centre for Drugs and Drug Addiction (EMCDDA), we chose to define youth as those aged 15 to 24. Accordingly, we hypothesized that **drug usage** will differ between countries, and that differences in the **relative proportion of youth (expressed as a percentage, PctYouth)** would help explain these differences in **drug usage** between countries. Previous research also suggests that **drug usage** is related to population-level wealth demographics (Lipari and Park-Lee, 2019). We chose **GDP** as a measure of population wealth because it is widely referenced and compared in the literature (Nagelhout et al., 2017). Accordingly, we hypothesized that differences in **Gross Domestic Product (GDP)** would also explain differences in **drug usage** between countries. The objectives of this project are outlined in *Section 1.2*; corresponding hypotheses are summarized as a table in *Section 1.3*.
 
 This analysis is important because it helps contribute to our understanding of the social determinants of health. Our analysis will specifically help improve our understanding of the characteristics of populations that may correspond to increased **drug usage**.
 
-## 1.2 Sampling design
-In an attempt to improve the reliability of the data, only **reference countries** that had **drug usage** estimates available for at least six **reference cities** in the original drug usage data set were considered in our analysis. Thus, the **reference countries** for our analysis include: *Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*. The sample for the following analysis was constructed from the observations corresponding to the average weekday drug usage of 5 different types of **reference drugs** (*amphetamines*, *canabis*, *cocaine*, *methamphetamine*, and *MDMA*), measured across **reference cities** nested within six European **reference countries**, between the **reference years** 2011 and 2020. Average weekday usage was chosen because weekend usage data are unavailable for many of the observations in the original drug usage data set. Note that observations corresponding to a number of combinations of type of illicit reference drug, reference city, and reference year are also missing  from the original data.
+## 1.2 Research Objectives 
+**Table 1.2. List of research objectives**
 
-# 2.0 Operational Definitions
-Throughout this document, bold text represents vocabulary terms that have been given specific, operational definitions for the context of the following analysis. These terms and definitions are provided below. 
+|No.     |Objective                           |
+|:-------|:-----------------------------------|
+|1.| To examine how **drug usage** differs between European **reference countries**.|
+|2.| To quantify the effect of the relative number of youth represented by the population of a country (**PctYouth**)  on **drug usage** by **reference country**.| 
+|3.| To quantify the effect of the relative wealth of a country (**GDP**) on **drug usage** by **reference country**.| 
+
+## 1.3 Hypotheses
+The effect of **reference country** on **drug usage** is dependent on the age (**PctYouth**) and wealth (**GDP**) characteristics of each **reference country**.
+
+## 1.4 Sampling design
+In an attempt to improve the reliability of the data, only **reference countries** that had **drug usage** estimates available for at least six **reference cities** in the original drug usage data set were considered in our analysis. Thus, the **reference countries** for our analysis include: *Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*. The sample for the following analysis was constructed from the observations corresponding to the average weekday drug usage of 5 different types of **reference drugs** (*amphetamines*, *canabis*, *cocaine*, *methamphetamine*, and *MDMA*), measured across **reference cities** nested within six European **reference countries**, between the **reference years** 2011 and 2020. Average weekday usage was chosen because weekend usage data are unavailable for many of the observations in the original drug usage data set. Note that observations corresponding to a number of combinations of type of illicit **reference drug**, **reference city**, and **reference year** are also missing from the original data. For example, many measurements are missing for *cannabis*; thus, we chose to not include **cannabis** in our final analysis. 
+
+## 1.5 Study design
+In the following, we use an observational study design to assess how **drug usage** differs across European **reference countries** included in our sample. The response variable of this study is **drug usage** (measured in mg/1000 people/day); the explanatory variable of this study is **reference country** (*Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*). We are also interested in two cofactors: **PctYouth**, the relative number of youth represented by the population of a country (measured as a proportion), and **GDP**, a measure of the monetary value of economic activity (i.e. the production of goods and services) corresponding to a country (measured in 2010 USD). These cofactors are utilized to quantify the effect of population age and wealth demographics, respectively, on the relationship between **drug usage**, our explanatory variable, and **reference country**, the explanatory variable (*Section 1.1*). Thus, we construct linear models to address our research objectives (*Section 6.0*). Using these models, we also test for interaction effects between the two cofactors (**PctYouth**, **GDP**) used in this analysis. 
+
+## 1.6 Operational Definitions
+Throughout this document, bold text represents vocabulary terms that have been given specific, operational definitions for the context of the following analysis. These terms and definitions are provided as a table below. 
+
+**Table 1.6. Operational definitions.**
 
 |Term       |Definition                           |
 |:----------|:------------------------------------|
@@ -32,38 +49,38 @@ Throughout this document, bold text represents vocabulary terms that have been g
 |**Gross Domestic Product (GDP)**| The sum of gross value added by all resident producers in the economy, plus any product taxes and minus any subsidies not included in the value of products, reported for each country of interest in 2010 United States Dollars (USD). Calculated without making deductions for depreciation of fabricated assets for depletion and degradation of natural resources (World Bank Data, 2021). For more information on why this metric was chosen, see *Section 3.3*.|
 |**PctYouth**| The number of individuals in the population that fall within the age range 15-24. Reported for each country of interest as a percentage (UN Department of Economic and Social Affairs, 2019). For more information on why this metric was chosen, see *Section 3.2*.|
 |**Reference city**| The cities across the 6 European countries that drug usage was estimated in. For additional information, see *Appendix A*.|
-|**Reference country**| The 6 European countries (*Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*) corresponding to drug usage estimates used in the present analysis. For ease of recognition, the names of these reference countries are presented in italics throughout this document. For more information on how these countries were selected, see *Section 1.2*.|
-|**Reference drug**| The 5 types of drugs (*amphetamines*, *cannabis*, *cocaine*, *MDMA*, *methamphetamine*) corresponding to drug usage estimates used in the present analysis. Throughout this document, the names of these illicit drugs are presented in italics for ease of recognition. For additional information on the types of illicit drugs considered in this analysis, see *Appendix B*.|
+|**Reference country**| The 6 European countries (*Austria*, *Belgium*, *Finland*, *Germany*, *Slovenia*, *Spain*, *Sweden*, and *Switzerland*) corresponding to drug usage estimates used in the present analysis. For ease of recognition, the names of these reference countries are presented in italics throughout this document. For more information on how these countries were selected, see *Appendix A*.|
+|**Reference drug**| The 5 types of drugs (*amphetamines*, *cannabis*, *cocaine*, *MDMA*, *methamphetamine*) corresponding to drug usage estimates used in the present analysis. Throughout this document, the names of these illicit drugs are presented in italics for ease of recognition. For additional information on the types of illicit drugs considered in this analysis, see *Appendix A*.|
 |**Reference year**| The 10 years (2011-2020) corresponding to drug usage estimates used in the present analysis. For additional information, see *Appendix A*.|
-|**Wastewater based epidemiology (WBE)**| A chemical analysis technique used to detect compounds in the waters serviced by wastewater treatment facilities. For example, WBE is used in the present analysis to produce estimates of **drug usage**. For more information on WBE, see *Appendix C*. 
+|**Wastewater based epidemiology (WBE)**| A chemical analysis technique used to detect compounds in the waters serviced by wastewater treatment facilities. For example, WBE is used in the present analysis to produce estimates of **drug usage**. For more information on WBE, see *Appendix B*. 
 
-# 3.0 Data acquisition
-The following section provides a brief overview of the data acquisition for the **drug usage**, **population age**, and **population wealth** estimates used in our analysis. For more information, see the full project metadata in *Appendix A*. 
+# 2.0 Data acquisition
+The following section provides a brief overview of the data acquisition for the **drug usage**, **population age**, and **population wealth** estimates used in our analysis (*Section 2.1*, *Section 2.2*, and *Section 2.3*, respectively). For more information, see the full project metadata in *Appendix A*. 
 
-## 3.1 Drug Use Data
+## 2.1 Drug Use Data
 **Drug usage** data was accessed through the European Monitoring Center for Drugs and Drug Addiction website (EMCDDA) (https://www.emcdda.europa.eu/publications/html/pods/waste-water-analysis_en#siteInfoTable). This data set looked at the usage of five common illicit drugs (*amphetamines*, *cannabis*, *cocaine*, *methamphetamine*, and *MDMA*), as measured in the wastewater of 137 cities across 29 European countries. The data were collected daily (in mg per 1000 people per day) over a span of 10 years (from 2011 to 2020). The data was averaged for each day of the week, the weekend, and the weekdays for each city over every year considered. 
 
-The subset of **drug use** data of interest is constructed from the **mean weekday usage** of each **reference drug** in each combination of **reference city**, nested within **reference country**, and **reference year**. For more information, including why weekday mean values were used and missing data in the original *drug use data set*, see *Section 1.2*.
+The subset of **drug use** data of interest is constructed from the **mean weekday usage** of each **reference drug** in each combination of **reference city**, nested within **reference country**, and **reference year**. For more information, including why weekday mean values were used and missing data in the original *drug use data set*, see *Section 1.4*.
 
-## 3.2 Population Age Data
-Data on **population age demographics** were accessed from the United Nations Department of Economic and Social Affairs website (https://population.un.org/wpp/). Data were available from 235 countries and regions over a period of 60 years (from 1950-2020). These data show the proportion of the population accounted for by a number of pre-defined age groups (e.g. youth aged 15-24).
+## 2.2 Population Age Data
+Data on population age demographics were accessed from the United Nations Department of Economic and Social Affairs website (https://population.un.org/wpp/). Data were available from 235 countries and regions over a period of 60 years (from 1950-2020). These data show the proportion of the population accounted for by a number of pre-defined age groups (e.g. youth aged 15-24).
 
-The subset of age data of interest was the **proportion of the population aged 15-24 (PctYouth)** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.2*).
+The subset of age data of interest was the **proportion of the population aged 15-24 (PctYouth)** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.4*).
 
-## 3.3 Population Wealth Data
-Data on **population wealth demographics** were accessed via the World Bank website (https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?fbclid=IwAR3tVOmvWo6ijRcavhXuUEhoDZgkVFE4DeiD1CtiZDYYiqpVk8sj0kSxxIY). This data set includes annual Gross Domestic Product (GDP; measured in the value of the 2010 US Dollar) for approximately 200 countries and regions between 1960 and 2020. 
+## 2.3 Population Wealth Data
+Data on population wealth demographics were accessed via the World Bank website (https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?fbclid=IwAR3tVOmvWo6ijRcavhXuUEhoDZgkVFE4DeiD1CtiZDYYiqpVk8sj0kSxxIY). This data set includes annual Gross Domestic Product (**GDP**; measured in the value of the 2010 US Dollar) for approximately 200 countries and regions between 1960 and 2020. 
 
-The subset of wealth data of interest was the **annual Gross Domestic Product (GDP)** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.2*). 
+The subset of wealth data of interest was the **GDP** corresponding to combinations of **reference countries** and **reference years** included in our study sample (*Section 1.4*). 
 
-# 4.0 Setup 
-In this section, we set the R Markdown Document (RMD) up for analysis. Setting the document up for analysis involved two steps, loading the dependency libraries, and importing data.
+# 3.0 Setup 
+In this section, we set the R Markdown Document (RMD) up for analysis. Setting the document up for analysis involved two steps, loading the dependency libraries (*Section 3.1*), and importing data (*Section 3.2*).
 ```{r Setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 4.1 Load Libraries 
-The first step of setting up our RMD was to load the dependency libraries. Descriptions and references for each of these packages are available in *Appendix D*. 
-``` {r Setup: Load Libraries, results = FALSE, message = FALSE}
+## 3.1 Load Libraries 
+The first step of setting up our RMD was to load the dependency libraries. Descriptions and references for each of these packages are available in *Appendix C*. 
+``` {r Setup: Load Libraries, results = FALSE, message = FALSE, warning = FALSE}
 library(ggplot2)
 library(dplyr)
 library(ggfortify)
@@ -75,8 +92,8 @@ library(plotrix)
 library(lattice)
 ```
 
-## 4.2 Import Data
-The second step of setting up our RMD was to import the raw data. The raw data files used in this RMD are available as a part of a GitHub Repository for this project (https://github.com/trevor-lyman/term.project).
+## 3.2 Import Data
+The second step of setting up our RMD was to import the raw data. The raw data files used in this RMD are the raw .csv source data files (*Appendix A*). These files have also been made available as a part of a GitHub Repository for this project (https://github.com/trevor-lyman/European-drug-usage_2011-2020).
 
 First, we imported the **drug usage** data. 
 ```{r Import Data: Drug Metabolite Data}
@@ -172,13 +189,13 @@ raw.gdp <- as.data.frame(na.omit(pivot_longer(data = read.csv("Data/GDP Data/raw
 head(raw.gdp); str(raw.gdp) #check data
 ```
 
-# 5.0 Tidying the Data
-After our data was imported into the R environment, our next step was to restructure the data to prepare for analysis. This is often referred to as 'tidying' the data (Beckerman et al., 2017). The goal of this section was to build a long-wise table that presented the **reference country**, **reference city**, **reference year**, **reference drug**, and **average weekday drug use** for each observation in the sample.
+# 4.0 Tidying the Data
+After our data was imported into the R environment, our next step was to restructure the data to prepare for analysis. This is often referred to as 'tidying' the data (Beckerman et al., 2017). We do this individually for the **drug usage**, **PctYouth**, and **GDP** data in subsections *Section 4.1*, *Section 4.2*, and *Section 4.3*, respectively. The goal of this section was to build a long-wise table that presented the **reference country**, **reference city**, **reference year**, **reference drug**, and **average weekday drug use** for each observation in the sample. This final step is shown in subsection *Section 4.5*.
 
-## 5.1 Drug Usage Data
-First, we tidied the **drug usage** data. These data were imported as individual .csv files for each type of drug and reference year in *Section 4.2*; we wanted to merge these observations into a single dataframe that contained observations of the average weekday **drug usage** corresponding to each type of drug from each combination of **reference country** and **reference year** in the sample. Thus, we took a nested approach to tidying these data. Additionally, the names and structure of the variables in this dataframe needed to be corrected.
+## 4.1 Drug Usage Data
+First, we tidied the **drug usage** data; this is shown below in 3 nested steps. These data were imported as individual .csv files for each type of drug and reference year in *Section 3.2*; we wanted to merge these observations into a single dataframe that contained observations of the average weekday **drug usage** corresponding to each type of drug from each combination of **reference country** and **reference year** in the sample. 
 
-First, we tidied each of the data corresponding to observations of the use of a **reference drug** from a single **reference year**. We repeated this step for each **reference drug** for a single **reference year**.  
+The first step of tidying the **drug usage** data is shown below. We began by tidying each of the data corresponding to observations of the use of a **reference drug** from a single **reference year**. We repeated this step for each **reference drug** for a single **reference year**.  
 ```{r Tidy Data: Drug Metabolite Data}
 #step 1: 2011 amphetamine
 amphetamine_2011.tidy <- amphetamine_2011 %>% #create data frame
@@ -199,7 +216,7 @@ levels(amphetamine_2011.tidy$country) <- c(BE = "Belgium", CZ = "Czech Republic"
 head(amphetamine_2011.tidy); str(amphetamine_2011.tidy) # check the data
 ```
 
-Then, we used these data to build an annual **drug usage** summary. This is a long-wise table showing the types and amount of **drug usage** observed in each **reference city** in the given **reference year**.
+The next step was to build an annual **drug usage** summary, as shown below. This is a long-wise table showing the types and amount of **drug usage** observed in each **reference city** in the given **reference year**.
 ```{r Tidy Data: Drug Metabolite Data -- Amphetamine 2011 Data}
 # 2011 cannabis 
 cannabis_2011.tidy <- cannabis_2011 %>% # create data frame
@@ -272,7 +289,7 @@ drug_2011 <- rbind(amphetamine_2011.tidy, cannabis_2011.tidy, cocaine_2011.tidy,
 head(drug_2011); str(drug_2011) #check the data
 ```
 
-After repeating this process for each reference year, we merged these annual **drug usage** summaries into a long-wise table adding the variable **reference year**. Finally, we reformatted the data types in the final table. 
+The final step of tidying the **drug usage** data was to repeat the above steps for each reference year in the sample, and to merge the resulting 10 annual **drug usage** summaries into a single long-wise table adding the variable **reference year**. Again, this step is shown below. 
 ```{r Tidy Data: Drug Metabolite Data -- 2011 Drug Metabolite Data}
 # 2012
 # amphetamine
@@ -818,10 +835,8 @@ drug.tidy$drug <- as.factor(drug.tidy$drug) # transform drug as factor
 head(drug.tidy); str(drug.tidy) # check the data
 ```
 
-## 5.2 Population Age Data
-Next, we tidied the **age** data. These data were already formatted to include the variables we were interested in: reference country, reference date, and **age**. However, we needed to rename these data to be consistent. Additionally, these variables were not formatted correctly: reference country should be a factor, reference date should be an integer, and **age** should be numeric (i.e. quantitative, continuous). Finally, these data also include observations that were outside the scope of the present study. 
-
-Thus, we tidied the **age** data in three steps. First, we renamed the variables; next we reformatted the data types; and finally we removed the observations outside the scope of our study.
+## 4.2 Population Age Data
+Next, we tidied the population age (**PctYouth**) data. These data were already formatted to include the variables we were interested in: **reference country**, **reference date**, and **PctYouth**. Thus, we tidied the **PctYouth** data in three simple steps. First, we renamed the variables; next we reformatted the data types; and finally we removed the observations outside the scope of our study.
 ```{r Tidy Data: Age Data, warning=FALSE}
 # step 1: rename variables 
 raw.PctYouth.tidy <- raw.PctYouth # create dataframe
@@ -849,10 +864,8 @@ PctYouth.tidy <- PctYouth[PctYouth$year == 2011 | PctYouth$year == 2012 | PctYou
 head(PctYouth.tidy); str(PctYouth.tidy) 
 ```
 
-## 5.3 GDP Data
-Then, we tidied the **GDP** data. We imported these data as a long-wise table in *Section 4.2*, and these data already included our three variables of interest: **reference country**, **reference year**, and **GDP** (2010 USD). However, these data also included a number of variables (e.g. 'Indicator.Name'), **reference years**, and **reference countries** that are outside the scope of our study. Additionally, the structure of **reference country** and **reference year** in this dataframe are incorrectly formatted as characters.
-
-Thus, we tidied the **GDP** data in three steps. First, we renamed the **GDP** columns and created a subset of our variables of interest. Next, we removed the observations that were outside the scope of our study. Finally, we reformatted the variable types. 
+## 4.3 Population Wealth Data
+Then, we tidied the population wealth (**GDP**) data. We imported these data as a long-wise table in *Section 3.2*. Thus, we tidied the **GDP** data in three steps. First, we renamed the **GDP** columns and created a subset of our variables of interest. Next, we removed the observations that were outside the scope of our study. Finally, we reformatted the variable types. 
 ```{r Tidy Data: GDP Data}
 # step 1: rename cols and subset vars of interest
 raw.gdp.temp <- na.omit(raw.gdp) #create dataframe
@@ -888,7 +901,7 @@ gdp.tidy$year <- as.integer(gdp.tidy$year)
 head(gdp.tidy); str(gdp.tidy) 
 ```
 
-## 5.4 Assembling the Data
+## 4.4 Assembling the Data
 Finally, the last step of tidying the data was to merge the three variables we tidied -- **drug usage**, **PctYouth**, and **GDP** -- into a single dataframe. Since each dataframe included information about the **reference country** and **reference year** corresponding to each observation, we merged the dataframes by a combination of **reference country** and **reference year** (i.e. we will match values of **age**, **GDP**, and **drug usage** from each of the respective dataframes by the variables **reference country** and **reference year**). 
 ```{r Tidy Data: Asemble the Data -- Merge Variables}
 data.temp <- (left_join(y = PctYouth.tidy, x = drug.tidy, by = c('country', 'year'))) 
@@ -899,125 +912,55 @@ data <- (left_join(y = gdp.tidy, x = data.temp, by = c('country', 'year')))
 head(data); str(data) # check the data
 ```
 
-# 6.0 Data Exploration
-In the last section, we tidied our data so that it was properly formatted for analysis. Before we proceed with our analysis, it was important to first look at the distributions of variables in our data and to examine the relationships that existed between our variables. Our analysis is centered around an linear model to predict differences in the weekday mean **drug usage** estimates between **reference countries**, given population age and wealth demographics. Accordingly, we must ensure that **drug usage**, **PctYouth**, and **GDP** conform to the assumptions of a linear model. Therefore, the following assumptions must be met:
+# 5.0 Data Exploration
+In the last section, we tidied our data so that it was properly formatted for analysis. Before we proceed with our analysis, it was important to first look at the distributions of variables in our data and to examine the relationships that existed between our variables. We do this first with the **drug usage** data in *Section 5.1*, next for the **PctYouth** data in *Section 5.2*, and then for the **GDP** data in *Section 5.3*. Finally, in *Section 5.4*, we finalize the data we will use in our analysis, presented in *Section 6*. 
 
-|No.  |Assumption                           |Section|
-|:----|:------------------------------------|:------|
-|1.|Model is appropriate (i.e. **drug usage**~**PctYouth** and **drug usage**~**GDP** are approximately linear).|*Section 6.1*|
-|2.|Normal distribution of residuals.|*Section 6.2*| 
-|3.|Homogeneity of variance across values of y hat (i.e. model predicted **drug use** estimates).|*Section 6.3*|
-|4.|No major outliers.|*Section 6.4*|
+## 5.1 Drug Usage
+**Drug usage** is a quantitative, continuously distributed variable. Thus, we created a series of 3 boxplots to assess the normality and distribution of these data. First, in *Figure 5.1a*, we present a boxplot of **drug usage**; in *Figure 5.1b*, we present a boxplot of **drug usage** ~ **reference country**; finally, in *Figure 5.1c*, we present a boxplot of **drug use** ~ **reference drug**. It is important to note that the distribution of **drug usage** is heavily right skewed (*Figure 5.1a*), and a number of potential outliers are shown by open circles in *Figures 5.1a - 5.1c*. Thus, we chose to log-transform **drug usage** to create a new variable, **log(drug usage)**.
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+boxplot(data$Weekday.mean, col = NULL, main = "Figure 5.1a", 
+        ylab = "Drug Usage (mg/1000 people/day)", range = 1.5) 
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+bwplot(data$Weekday.mean~data$country, strip = strip.custom(bg = 'white'),   
+       cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
+       main = "Figure 5.1b",
+       xlab = "Reference Country", ylab = "Drug Usage (mg/1000 people/day)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
 
-In the following section, each of these assumptions of the model are assessed in individual subsections, starting with assumption no. 1. In the fifth and final subsection (*Section 6.5*), I will ensure that our data are prepared for analysis. 
-
-## 6.1 Fit of the Model
-First, we must ensure that the model fit is appropriate for our data. In other words, we want to ensure that population age (i.e. **PctYouth**) and wealth (i.e. **GDP**) demographics are linearly related to weekday mean **drug usage**. We do this using a pair of scatterplots below, shown for **PctYouth** first (*Figure 6.1a*) and **GDP** second (*Figure 6.1b*). For each scatterplot, the line shown represents the least-squares mean regression (LSMR) line of best fit for the data, and the grey area around the line of best fit represents the corresponding 95% confidence interval. From the scatterplots and regression lines constructed, it appears that a linear relationship is not appropriate for describing the relationship between **drug usage** and either **PctYouth** or **GDP**. 
-```{r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
-ggplot(data = data, aes(x = PctYouth, y = Weekday.mean)) +
-  geom_point() + # scatter
-  geom_smooth(method = "lm", color = "black") + #LSMR line
-  labs(title = "Figure 6.1a", # add labels
-       x = "Population Aged 15-24 (Percent)", 
-       y = "Drug Usage (mg/1000 people/day)") +
-  theme_classic() + 
-  theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-
-ggplot(data = data, aes(x = GDP, y = Weekday.mean)) +
-  geom_point() + # scatter
-  geom_smooth(method = "lm", color = "black") + # LSMR line
-  labs(title = "Figure 6.1b", # add labels
-       x = "GDP (USD)", 
-       y = "Drug Usage (mg/1000 people/day)") +
-  theme_classic() + 
-  theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
+bwplot(data$Weekday.mean~data$drug, strip = strip.custom(bg = 'white'),   
+       cex = .5, layout = c(1, 1),
+       main = "Figure 5.1c",
+       xlab = "Reference Drug", ylab = "Drug Usage (mg/1000 people/day)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
 ```
 
-However, transforming our data may be sufficient to satisfy the condition of appropriate model fit. To explore our options, we examine the effect of a natural log transformation of **drug usage** and **GDP**. Note that for **drug usage**, a vertical translation (10 units) is applied before the log transformation to avoid dividing by 0. As shown in *Section 6.4*, we chose to transform these variables specifically because they are right-skewed. Again, a pair of scatterplots is shown below, representing a plot of log-transformed **drug usage** by **PctYouth** (*Figure 6.1c*) and a plot of log-transformed **drug usage** by log-transformed **GDP** (*Figure 6.1d*). Again, the LSMR line of best fit, and the corresponding 95% confidence interval, are shown for each plot. As shown below, linear relationships better represent these data following these transformations. Accordingly, we will continue our analysis with the log-transformed versions of **drug usage** and **GDP** (i.e. **log(drug use)** and **log(GDP)**). 
-```{r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
-ggplot(data = data, aes(x = PctYouth, y = log(10 + Weekday.mean))) +
-  geom_point() + # scatter
-  geom_smooth(method = "lm", color = "black") + #LSMR line
-  labs(title = "Figure 6.1c", # add labels
-       x = "Population Aged 15-24 (Percent)", 
-       y = "Drug Usage (mg/1000 people/day)") +
-  theme_classic() + 
-  theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-
-ggplot(data = data, aes(x = log(GDP), y = log(10+ Weekday.mean))) +
-  geom_point() + # scatter
-  geom_smooth(method = "lm", color = "black") + # LSMR line
-  labs(title = "Figure 6.1d", # add labels
-       x = "GDP (USD)", 
-       y = "Drug Usage (mg/1000 people/day)") +
-  theme_classic() + 
-  theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-
-Z <- data$Weekday.mean+10
+Next, we examine the distributions of **log(drug use)**. **log(drug use)** is presented in *Figure 5.1d*, **log(drug use)** ~ **reference country** is presented in *Figure 6.1e*, and **log(drug use)** ~ **reference drug** is presented in *Figure 5.1f*. As shown in *Figure 5.1d*, there are no potential outliers identified in the boxplot of **log(drug use)**. Although several potential outliers are highlighted in the below plots with open circles, these points are relatively few in number and small in magnitude when compared to distributions of the **drug use** data before the log-transformation (*Figures 5.1a-c*). Thus, these plots suggest the assumption is met for the **log(drug use)** data.
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+Z <- data$Weekday.mean+10 # to avoid NA errors
 temp <- log(10 + data$Weekday.mean)
 data["log.Weekday.mean"] <- temp
 data$log.Weekday.mean[is.na(data$log.Weekday.mean)] <- 0
 
-Y <- data$GDP
-temp2 <- log(data$GDP)
-data["log.GDP"] <- temp2
-data$log.GDP[is.na(data$log.GDP)] <- 0
-```
-
-## 6.2 Normality of Resiuduals
-Next, we need to assess the normality of residuals produced by the relationships between **log(Drug Usage)** and **PctYouth** (*Figure 6.2a*), and between **log(Drug Usage)** and **log(GDP)** (*Figure 6.2b*). We can do this using two qqplots, corresponding to each of the explanatory variables. As shown below, these plots suggest that the residuals are approximately normally distributed for both of these relationships. Therefore, these plots suggest that the assumption of normality of residuals is met. 
-```{r, warning=FALSE, fig.show="hold", out.width="50%"}
-mod1 <- lm(log.Weekday.mean~PctYouth,data=data)
-fig6.2a <- autoplot(mod1, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
-fig6.2a@plots[[2]] + ggtitle("Figure 6.2a") + theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-
-mod2 <- lm(log.Weekday.mean~log.GDP,data=data)
-fig6.2b <- autoplot(mod2, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-fig6.2b@plots[[2]] + ggtitle("Figure 6.2b") + theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-```
-
-## 6.3 Homogeneity of Variance 
-Next, we must asses the homogeneity of variance across the model predicted **drug use** estimates, according to both **PctYouth** (*Figure 6.3 a*) and **log(GDP)** (*Figure 6.3b*). To do this, we assess the scale-location plots corresponding to each of these relationships. As shown below, these plots suggest that both relationships approximately conform to the homogeneity of variance.
-```{r, warning=FALSE, fig.show="hold", out.width="50%"}
-fig6.3a <- autoplot(mod1, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
-fig6.3a@plots[[3]] + ggtitle("Figure 6.3a") + theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-
-fig6.3b <- autoplot(mod2, smooth.colour=NA) + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-fig6.3b@plots[[3]] + ggtitle("Figure 6.3b") + theme(plot.title = element_text(hjust = 0.5)) + # center title
-  theme(plot.title = element_text(face = "bold")) + # bold title
-  theme(text = element_text(size=18))
-```
-
-## 6.4 Potential Outliers
-To sastisfy the final condition of a linear model, we must assess any potential outliers in the data. To do this, we consider trios of boxplots for each of **log(drug use)**, **Pct Youth**, and **log(GDP)**. For each variable, one boxplot will represent the distribution of the data, one boxplot will represent the distribution of the data by **reference country**, and one boxplot will represent the distribution of the data by **reference drug**. 
-
-First, we examine the distributions of **log(drug use)**. **log(drug use)** is presented in *Figure 6.4a*, **log(drug use)** ~ **reference country** is presented in *Figure 6.4b*, and **log(drug use)** ~ **reference drug** is presented in *Figure 6.4c*. As shown in *Figure 6.4a*, there are no potential outliers identified in the boxplot of **log(drug use)**. Although several potential outliers are highlighted in the below plots with open circles, these points are relatively few in number and small in magnitude when compared to distributions of the **drug use** data before the log-transformation (*Appendix E*). Thus, these plots suggest the assumption is met for the **log(drug use)** data.
-```{r, warning=FALSE, fig.show="hold", out.width="50%"}
-boxplot(data$log.Weekday.mean, col = NULL, main = "Figure 6.1d", 
+boxplot(data$log.Weekday.mean, col = NULL, main = "Figure 5.1d", 
         ylab = "Drug Usage (log(mg/1000 people/day))", range = 1.5) 
 ```
 ```{r, warning=FALSE, fig.show="hold", out.width="50%"}
 bwplot(data$log.Weekday.mean~data$country, strip = strip.custom(bg = 'white'),   
        cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
-       main = "Figure 6.1e",
+       main = "Figure 5.1e",
        xlab = "Reference Country", ylab = "Drug Usage (log(mg/1000 people/day))",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1029,7 +972,7 @@ bwplot(data$log.Weekday.mean~data$country, strip = strip.custom(bg = 'white'),
 
 bwplot(data$log.Weekday.mean~data$drug, strip = strip.custom(bg = 'white'),   
        cex = .5, layout = c(1, 1),
-       main = "Figure 6.1f",
+       main = "Figure 5.1f",
        xlab = "Reference Drug", ylab = "Drug Usage (log(mg/1000 people/day))",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1040,15 +983,16 @@ bwplot(data$log.Weekday.mean~data$drug, strip = strip.custom(bg = 'white'),
                      y = list(relation = "same"))) 
 ```
 
-Next, we examine the distributions of **PctYouth**. **PctYouth** is presented in *Figure 6.4d*, **PctYouth** ~ **reference country** is presented in *Figure 6.4e*, and **PctYouth** ~ **reference drug** is presented in *Figure 6.4f*. As shown in *Figure 6.4d*, there is one potential outliers identified in the boxplot of **PctYouth**. Again, these potential outliers are highlighted with open circles, and these points are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **PctYouth** data.
-```{r, warning=FALSE, fig.show="hold", out.width="50%"}
-boxplot(data$PctYouth, col = NULL, main = "Figure 6.2a", 
+## 5.2 PctYouth
+Like **drug usage**, **PctYouth** is a quantitative, continuously distributed variable. Thus, we created a series of 3 boxplots to assess the normality and distribution of these data. Next, we examine the distributions of **PctYouth**. **PctYouth** is presented in *Figure 5.2a*, **PctYouth** ~ **reference country** is presented in *Figure 5.2b*, and **PctYouth** ~ **reference drug** is presented in *Figure 5.4c*. As shown in *Figure 5.4c*, there is one potential outliers identified in the boxplot of **PctYouth**. Again, these potential outliers are highlighted with open circles, and these points are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **PctYouth** data.
+```{r, warning=FALSE, fig.show="hold", fig.align='center', out.width="50%"}
+boxplot(data$PctYouth, col = NULL, main = "Figure 5.2a", 
         ylab = "Population Aged 15-24 (Percent)", range = 1.5) 
 ```
 ```{r, warning=FALSE, fig.show="hold", out.width="50%"}
 bwplot(data$PctYouth~data$country, strip = strip.custom(bg = 'white'),   
        cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
-       main = "Figure 6.2b",
+       main = "Figure 5.2b",
        xlab = "Reference Country", ylab = "Population Aged 15-24 (Percent)",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1060,7 +1004,7 @@ bwplot(data$PctYouth~data$country, strip = strip.custom(bg = 'white'),
 
 bwplot(data$PctYouth~data$drug, strip = strip.custom(bg = 'white'),   
        cex = .5, layout = c(1, 1),
-       main = "Figure 6.2c",
+       main = "Figure 5.2c",
        xlab = "Reference Drug", ylab = "Population Aged 15-24 (Percent)",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1071,15 +1015,52 @@ bwplot(data$PctYouth~data$drug, strip = strip.custom(bg = 'white'),
                      y = list(relation = "same"))) 
 ```
 
-Finally, we assess the normality of **log(GDP)**. **log(GDP)** is presented in *Figure 6.4g*, **log(GDP)** ~ **reference country** is presented in *Figure 6.4h*, and **log(GDP)** ~ **reference drug** is presented in *Figure 6.4i*. As shown in *Figure 6.4g*, there are no potential outliers identified in the boxplot of **PctYouth**. Potential outliers shown in *Figure 6.4h* and *Figure 6.4i*, highlighted with open circles, are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **log(GDP)** data.
+## 5.3 GDP
+Like **drug usage** and **PctYouth**, **GDP** is a quantitative, continuously distributed variable. Thus, we created a series of 3 boxplots to assess the normality and distribution of these data. First, in *Figure 5.3a*, we present a boxplot of **GDP**. Next, in *Figure 5.3b*, we present a boxplot of **GDP** ~ **reference country**. Finally, in *Figure 5.3c*, we present a boxplot of **GDP** ~ **reference drug**. It is important to note that the distribution of **GDP** is right skewed (*Figure 5.3a*), and a number of potential outliers are shown by open circles in *Figures 5.3a - 5.3c*. Thus, we chose to log-transform **GDP** to create a new variable, **log(GDP)**.
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+boxplot(data$GDP, col = NULL, main = "Figure 5.3a", 
+        ylab = "GDP (USD)", range = 1.5) 
+```
 ```{r, warning=FALSE, fig.show="hold", out.width="50%"}
-boxplot(data$log.GDP, col = NULL, main = "Figure 6.3d", 
+bwplot(data$GDP~data$country, strip = strip.custom(bg = 'white'),   
+       cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
+       main = "Figure 5.3b",
+       xlab = "Reference Country", ylab = "(USD)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same"))) 
+
+bwplot(data$GDP~data$drug, strip = strip.custom(bg = 'white'),   
+       cex = .5, layout = c(1, 1),
+       main = "Figure 5.3c",
+       xlab = "Reference Drug", ylab = "(USD)",
+       par.settings = list(
+         box.rectangle = list(col = 1),
+         box.umbrella  = list(col = 1),
+         plot.symbol = list(col=1),
+         plot.symbol   = list(cex = .5)),
+       scales = list(x = list(relation = "same"),
+                     y = list(relation = "same")))  
+```
+
+Finally, we assess the normality of **log(GDP)**. **log(GDP)** is presented in *Figure 5.3d*, **log(GDP)** ~ **reference country** is presented in *Figure 5.3e*, and **log(GDP)** ~ **reference drug** is presented in *Figure 5.3f*. As shown in *Figure 5.3d*, there are no potential outliers identified in the boxplot of **PctYouth**. Potential outliers shown in *Figure 5.3e* and *Figure 5.3f*, highlighted with open circles, are relatively few in number and small in magnitude. Thus, these plots suggest the assumption is met for the **log(GDP)** data.
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+Y <- data$GDP
+temp2 <- log(data$GDP)
+data["log.GDP"] <- temp2
+data$log.GDP[is.na(data$log.GDP)] <- 0
+
+boxplot(data$log.GDP, col = NULL, main = "Figure 5.3d", 
         ylab = "GDP (log(USD))", range = 1.5) 
 ```
 ```{r, warning=FALSE, fig.show="hold", out.width="50%"}
 bwplot(data$log.GDP~data$country, strip = strip.custom(bg = 'white'),   
        cex = 0.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, layout = c(1, 1),
-       main = "Figure 6.3e",
+       main = "Figure 5.3e",
        xlab = "Reference Country", ylab = "GDP (log(USD))",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1091,7 +1072,7 @@ bwplot(data$log.GDP~data$country, strip = strip.custom(bg = 'white'),
 
 bwplot(data$log.GDP~data$drug, strip = strip.custom(bg = 'white'),   
        cex = .5, layout = c(1, 1),
-       main = "Figure 6.3f",
+       main = "Figure 5.3f",
        xlab = "Reference Drug", ylab = "GDP (log(USD))",
        par.settings = list(
          box.rectangle = list(col = 1),
@@ -1102,35 +1083,171 @@ bwplot(data$log.GDP~data$drug, strip = strip.custom(bg = 'white'),
                      y = list(relation = "same")))  
 ```
 
-## 6.5 Prepare for Analysis
-Thus, the above subsections suggest that the assumptions are met to construct a linear model of **log(drug usage)** by **PctYouth** and **log(GDP)**. In the following subsection, we finalize the data for analysis. 
+## 5.5 Prepare for Analysis
+Thus, in *Section 6* we will proceed with our analysis and construct a linear model of **log(drug usage)** by **PctYouth** and **log(GDP)**, based on the distributions explored in the above subsections. In this final subsection, we finalize the data for analysis. 
 ```{r}
 data <- data %>% select(-Weekday.mean, -GDP) # remove non-transformed variables
 
 head(data); str(data) # check data
 ```
+# 6.0 Drug Metabolite Analyses
+In the following section, we proceeded with our analysis to test our hypothesis that the effect of **country** on **drug usage** is a function of **PctYouth** and **GDP**. We present our analysis following the Plot -> Model -> Check Assumptions -> Interpret -> Plot Again workflow outlined in Beckerman et al. (2017).
 
-# 7.0 Drug Metabolite Analyses
-In the following section, we proceeded with our analyses to test our hypothesis that the effect of **country** on **drug usage** is a function of **age** and **GDP**. We do so by following the Plot -> Model -> Check Assumptions -> Interpret -> Plot Again workflow outlined in Beckerman et al. (2017).
+## 6.1 Amphetamines
+In this subsection, we look at *amphetamine* usage. To perform this analysis, we created a subset of only the *amphetamine* data in a new dataframe called amphetplot. We present the summary statistics (mean, sample size, and standard error by country) for the new dataframe below.
+```{r Amphetamines}
+#Create new dataframe containing only data pertaining to amphetamine
+amphetplot <- data %>% 
+  filter(drug == "amphetamine") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP) 
 
-## 7.1 Cocaine
-First, we look at **cocaine** usage.
+#Create dataframe with mean amphetamine levels, sample size, and standard error by country
+plot3 <- amphetplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot3
+```
 
-### 7.1.1 Organize Data
-To perform this analysis, we created a subset of only the **cocaine** data in a new dataframe called cocaineplot.
+Next, we present the **log(drug usage)** (*Figure 6.1a*), **PctYouth** (*Figure 6.1b*), and **log(GDP)** (*Figure 6.1c*) data associated with *amphetamine* as simple point plots. For the first plot of **reference country** vs *amphetamine* consumption, Austria appears to consume the least amount of *amphetamine*, while Belgium and Germany appear to consume the  most (*Figure 6.1a*). The **PctYouth** vs *amphetamine* consumption plot appears to show a positive relationship between **PctYouth** and *amphetamine* consumption (*Figure 6.1b*). The **log(GDP)** vs *amphetamine* plot does not appear to show any relationship (*Figure 6.1c*). 
+```{r warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+#Plot amphetamine data by country
+ggplot(data = amphetplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("Amphetamine Consumed (log (mg/1000 people/day))") +
+  ggtitle("Figure 6.1a") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+```{r warning=FALSE, fig.show="hold", out.width="50%"}
+#Plot amphetamine data by age
+ggplot(data = amphetplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Figure 6.1b") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+#Plot amphetamine data by GDP
+ggplot(data = amphetplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP(log(USD))") +
+  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
+  ggtitle("Figure 6.1c") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+Then, we fit a linear model to assess our hypothesis that the effect of country on *amphetamine* usage is a function of **PctYouth** and **log(GDP)**. To address our hypothesis, we are particularly interested in the interaction effects between **reference country** : **Pct Youth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+ampmod <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP) 
+```
+
+Before we can run the linear model with *amphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (*Figure 6.1d*), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (*Figure 6.1e*), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (*Figure 6.1f*) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (*Figure 6.1g*) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *amphetamine*.
+```{r warning=FALSE, fig.show="hold", out.width="50%"}
+#Check assumptions
+amphetautoplot <- autoplot(ampmod, smooth.colour = NA) + theme_bw()
+
+amphetautoplot[[1]] +
+  labs(title = "Figure 6.1d", # add labels
+       x = "Amphetamine Model Fitted Values", 
+       y = "Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+amphetautoplot[[2]] +
+    labs(title = "Figure 6.1e", # add labels
+       x = "Amphetamine Model Theoretical Quantities", 
+       y = "Standardized Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+amphetautoplot[[3]] +
+  labs(title = "Figure 6.1f", # add labels
+       x = "Amphetamine Model Fitted Values") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+amphetautoplot[[4]] + 
+  labs(title = "Figure 6.1g", # add labels
+       x = "Amphetamine Model Factor Level Combination") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+Then, we produce an ANOVA table and summary table to help interpret our model. Most of the variation in *amphetamine* usage is explained by **PctYouth** (Mean sq value of 21.27), and some variation is also explained by **reference country** (Mean sq value of 13.57). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following subsection.
+```{r}
+#Generate ANOVA table and summary
+anova(ampmod)
+summary(ampmod)
+```
+
+Given the results of the ANOVA table produced below, we then simplify our model to exclude GDP and the variable interactions. These data suggest that there is a significant difference in *amphetamine* consumption among the European countries examined in this study, with Sweden consuming the most *amphetamine* and Slovenia consuming the least (F=21.67, df=7, p<0.05). **PctYouth** also had a significant effect on *amphetamine* consumption, with a lower proportion of youth in the population being associated with higher amounts of *amphetamine* usage (F=33.97, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *amphetamine* usage depends on **PctYouth** and **GDP** was not supported.
+```{r}
+#Recreate model without GDP and interaction terms
+ampmod2 <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth)
+
+#Generate ANOVA table
+anova(ampmod2)
+
+#Generate summary
+summary(ampmod2)
+```
+
+Finally, we replot our amphetamine data using predicted values from our linear model by **PctYouth** in *Figure 6.1h*.
+```{r warning=FALSE, message = FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+#Replot with age and country in same plot 
+#Make new x values
+new.x4 <- expand.grid( 
+  country = unique(amphetplot$country),
+  PctYouth = seq(from=min(amphetplot$PctYouth), to=max(amphetplot$PctYouth) +1),
+  log.GDP = mean(amphetplot$log.GDP))
+
+#New y values predicted from the model
+new.y4 <- predict(ampmod2, newdata = new.x4, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese2
+addThese4 <- data.frame(new.x4, new.y4)
+
+#Plot age vs cocaine consumption including countries
+ggplot(data = addThese4, aes(x = PctYouth, y = fit, group = country, color = country)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  geom_errorbar(data = addThese4, aes(ymin = lwr, ymax = upr), size = 0.2, stat = "identity") +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Mean Amphetamine Usage
+       (log mg/1000 people/day)") +
+  ggtitle("Figure 6.1h") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+## 6.2 Cocaine
+In this subsection, we look at *cocaine* usage. To perform this analysis, we created a subset of only the *cocaine* data in a new dataframe called cocaineplot. We present the summary statistics (mean, sample size, and standard error by country) for the *cocaine* data below.
 ```{r Cocaine}
 #Create new dataframe containing only data pertaining to cocaine
 cocaineplot <- data %>% 
   filter(drug == "cocaine") %>%
-    select(country, PctYouth, log.Weekday.mean, log.GDP)
+    select(country, PctYouth, log.Weekday.mean, log.GDP) 
 
-#check data
-glimpse(cocaineplot)
-```
-
-### 7.1.2 Summary Statistics
-Here are the summary statistics (mean, sample size, and standard error by country) for the **cocaine** data.
-```{r}
 #Create dataframe with mean cocaine levels, sample size, and standard error by country
 plot2 <- cocaineplot %>% 
   group_by(country) %>%
@@ -1142,90 +1259,96 @@ plot2 <- cocaineplot %>%
 plot2
 ```
 
-### 7.1.3 Plot
-Here, the **log(drug)**, **PctYouth**, and **log(GDP)** data associated with *cocaine* are presented as simple point plots.
-
-For the first plot of **reference country** vs *cocaine* consumption, Finland appears to consume the least amount of *cocaine* while Belgium appears to consume the most. The **PctYouth** vs *cocaine* consumption plot appears to show a negative relationship between **PctYouth** and *cocaine* consumption. The **log(GDP)** vs *cocaine* plot does not appear to show any relationship. 
-```{r}
+Next, we plot the **log(drug)** (*Figure 6.2a*), **PctYouth** (*Figure 6.2b*), and **log(GDP)** (*Figure 6.2c*) data associated with *cocaine*, presented as simple point plots. Thus, we present three plots. For the first plot of **reference country** vs *cocaine* consumption, Finland appears to consume the least amount of *cocaine* while Belgium appears to consume the most (*Figure 6.2a*). The **PctYouth** vs *cocaine* consumption plot appears to show a negative relationship between **PctYouth** and *cocaine* consumption (*Figure 6.2b*). The **log(GDP)** vs *cocaine* plot does not appear to show any relationship (*Figure 6.2c*). 
+```{r warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
 #Plot our cocaine data by country
 ggplot(data = cocaineplot, aes(x = country, y = log.Weekday.mean)) +
   geom_point(size = 4) +
   xlab("Country") +
   ylab("Cocaine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Cocaine Consumed by European Country") +
-  theme_bw()
-
+  ggtitle("Figure 6.2a") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+```{r warning=FALSE, fig.show="hold", out.width="50%"}
 #Plot our cocaine data by age
 ggplot(data = cocaineplot, aes(x = PctYouth, y = log.Weekday.mean)) +
   geom_point() +
   xlab("Percent Youth (Ages 15-24)") +
   ylab("Cocaine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Cocaine Consumed vs Percent Youth") +
-  theme_classic()
+  ggtitle("Figure 6.2b") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 
 #Plot our cocaine data by GDP
 ggplot(data = cocaineplot, aes(x = log.GDP, y = log.Weekday.mean)) +
   geom_point() +
   xlab("GDP (log(USD))") +
   ylab("Cocaine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Cocaine Consumed vs GDP") +
-  theme_classic()
+  ggtitle("Figure 6.2c") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
 
-### 7.1.4 Model
-Here we fit a linear model, where we hypothesize that the effect of **reference country** on *cocaine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the cocaineplot data frame. To address our hypothesis, we are particularly interested the interaction effects  **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+Then, we fit a linear model, where we hypothesize that the effect of **reference country** on *cocaine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the cocaineplot data frame. To address our hypothesis, we are particularly interested the interaction effects  **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
 ```{r}
 #Create Model  
 cocmod <- lm(data = cocaineplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
 ```
 
-### 7.1.5 Check Assumptions
-Before we can run the linear model with **cocaine** data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (top right), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for **cocaine**.
-```{r}
+Before we can run the linear model with **cocaine** data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (*Figure 6.2d*), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (*Figure 6.2e*), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (*Figure 6.2f*) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (*Figure 6.2g*) shows no obvious influential data points. Thus, we were ready to continue with the linear model for **cocaine**.
+```{r warning=FALSE, fig.show="hold", out.width="50%"}
 #Check assumptions
-autoplot(cocmod, smooth.colour = NA)
+cocautoplot <- autoplot(cocmod, smooth.colour = NA) + theme_bw()
+
+cocautoplot[[1]] +
+  labs(title = "Figure 6.2d", # add labels
+       x = "Cocaine Model Fitted Values", 
+       y = "Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+cocautoplot[[2]] +
+    labs(title = "Figure 6.2e", # add labels
+       x = "Cocaine Model Theoretical Quantities", 
+       y = "Standardized Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+cocautoplot[[3]] +
+  labs(title = "Figure 6.2f", # add labels
+       x = "Cocaine Model Fitted Values") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+cocautoplot[[4]] + 
+  labs(title = "Figure 6.2g", # add labels
+       x = "Cocaine Model Factor Level Combination") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
 
-### 7.1.6 Interpret
-Here, we produce an ANOVA table and summary table to help interpret our model. 
+Next, we produce an ANOVA table and summary table to help interpret our model. First looking at the ANOVA table produced below, most of the variation in **cocaine** usage is explained by **reference country** (Mean sq value of 52.613), and some variation is also explained by **PctYouth** (Mean sq value of 7.349), **log(GDP)** (Mean sq value of 8.156), the interaction between **country** and **PctYouth** (Mean sq value of 3.970), and the interaction between **country** and **log(GDP)** (Mean sq value of 1.849).
 
-First looking at the ANOVA table produced below, most of the variation in **cocaine** usage is explained by **reference country** (Mean sq value of 52.613), and some variation is also explained by **PctYouth** (Mean sq value of 7.349), **log(GDP)** (Mean sq value of 8.156), the interaction between **country** and **PctYouth** (Mean sq value of 3.970), and the interaction between **country** and **log(GDP)** (Mean sq value of 1.849).
-
-Results from the ANOVA table suggest that there is a significant difference in **cocaine** consumption among the European countries examined in this study, with Switzerland consuming the most **cocaine** and Finland consuming the least (F=106.7, df=7, p<0.05). **PctYouth** also had a significant effect on **cocaine** consumption, with a lower proportion of youth in the population being associated with higher amounts of **cocaine** usage (F=11.3, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on **cocaine** usage is a function of **PctYouth** and **GDP** was not supported.
- 
+Results from the ANOVA table suggest that there is a significant interaction effect between **reference country** : **PctYouth** (F=4.67, df=7, p<0.05) and  **reference country** : **log(GDP)** (F=2.18, df=7, p<0.05), which suggests that our hypothesis that the effect of **reference country** on **cocaine** usage is a function of **PctYouth** and **GDP** was supported. Since the interaction effects were significant, the main effects cannot be interpreted alone. 
 ```{r}
 #Generate ANOVA table and summary
 anova(cocmod)
 summary(cocmod)
 ```
 
-
-### 7.1.7 Plot Again
-Here we replot our cocaine data using predicted values from our linear model
-```{r}
-# Plot by country first
-# Make new x values with unique country values, and mean age and GDP (standardizes it)
-new.x1 <- expand.grid( 
-  country = unique(cocaineplot$country),
-  PctYouth = mean(cocaineplot$PctYouth),
-  log.GDP = mean(cocaineplot$log.GDP))
-
-#New y values predicted from the model
-new.y1 <- predict(cocmod, newdata = new.x1, interval = "confidence")
-
-#Add the new x and y to a data frame called addThese1
-addThese1 <- data.frame(new.x1, new.y1)
-
-#Plot country by cocaine consumption using predicted values
-ggplot(data = addThese1, aes(x = country, y = fit)) +
-  geom_point(size = 4) +
-  geom_errorbar(data = addThese1, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
-  xlab("Country") +
-  ylab("Mean Log Cocaine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean Cocaine Consumed by European Country") +
-  theme_bw()
-
-
+Finally, we replot our cocaine data using predicted values from our linear model to visualize the interaction. In *Figure 6.2h*, we plot the *cocaine* model predicted values by **PctYouth**. In *Figure 6.2i*, we plot the *cocaine* model predicted values by **log(GDP)**.
+```{r, message = FALSE, warning=FALSE, fig.show="hold", out.width="50%"}
 #Now do the same with age
 #Make new x values
 new.x2 <- expand.grid( 
@@ -1243,308 +1366,50 @@ addThese2 <- data.frame(new.x2, new.y2)
 ggplot(data = addThese2, aes(x = PctYouth, y = fit, group = country, color = country)) +
   geom_point() +
   geom_smooth(method="lm") +
+  geom_errorbar(data = addThese2, aes(ymin = lwr, ymax = upr), size = 0.2, stat = "identity") +
   xlab("Percent Youth (Ages 15-24)") +
   ylab("Mean Cocaine Consumed (log mg/1000 people/day)") +
-  ggtitle("Mean Cocaine Consumed vs Percent Youth") +
-  theme_classic()
-```
+  ggtitle("Figure 6.2h") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 
-## 7.2 Amphetamines
-Next, we looked at *amphetamine* usage.
-
-### 7.2.1 Organize Data
-To perform this analysis, we created a subset of only the *amphetamine* data in a new dataframe called amphetplot.
-```{r Amphetamines}
-
-#Create new dataframe containing only data pertaining to amphetamine
-amphetplot <- data %>% 
-  filter(drug == "amphetamine") %>%
-    select(country, PctYouth, log.Weekday.mean, log.GDP) 
-
-#check data
-glimpse(amphetplot)
-```
-
-### 7.2.2 Summary Statistics
-Here are the summary statistics (mean, sample size, and standard error by country) for the *amphetamine* data.
-```{r}
-#Create dataframe with mean amphetamine levels, sample size, and standard error by country
-plot3 <- amphetplot %>% 
-  group_by(country) %>%
-    summarise(
-      mean = mean(log.Weekday.mean, na.rm = TRUE),
-      samplesize = n(),
-      SE = std.error(log.Weekday.mean)
-    )
-plot3
-```
-
-### 7.2.3 Plot
-Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *amphetamine* are presented as simple point plots.
-
-For the first plot of **reference country** vs *amphetamine* consumption, Austria appears to consume the least amount of *amphetamine*, while Belgium and Germany appear to consume the  most. The **PctYouth** vs *amphetamine* consumption plot appears to show a positive relationship between **PctYouth** and *amphetamine* consumption. The **log(GDP)** vs *amphetamine* plot does not appear to show any relationship. 
-```{r}
-#Plot amphetamine data by country
-ggplot(data = amphetplot, aes(x = country, y = log.Weekday.mean)) +
-  geom_point(size = 4) +
-  xlab("Country") +
-  ylab("Amphetamine Consumed (log (mg/1000 people/day))") +
-  ggtitle("Amphetamine Consumed by European Country") +
-  theme_bw()
-
-#Plot amphetamine data by age
-ggplot(data = amphetplot, aes(x = PctYouth, y = log.Weekday.mean)) +
-  geom_point() +
-  xlab("Percent Youth (Ages 15-24)") +
-  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Amphetamine Consumed vs Percent Youth") +
-  theme_classic()
-
-#Plot amphetamine data by GDP
-ggplot(data = amphetplot, aes(x = log.GDP, y = log.Weekday.mean)) +
-  geom_point() +
-  xlab("GDP(log(USD))") +
-  ylab("Amphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Amphetamine Consumed vs GDP") +
-  theme_classic()
-```
-
-### 7.2.4 Model
-Here we fit a linear model, where we hypothesize that the effect of country on *amphetamine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the amphetplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **Pct Youth** and **reference country** : **log(GDP)**. 
-```{r}
-#Create Model  
-ampmod <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
-```
-
-
-### 7.2.5 Check Assumptions
-Before we can run the linear model with *amphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. In the Normal QQ plot (top right), most of the residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *amphetamine*.
-```{r}
-#Check assumptions
-autoplot(ampmod, smooth.colour = NA)
-```
-
-### 7.2.6 Interpret
-Here, we produce an ANOVA table and summary table to help interpret our model. 
-
-First looking at the ANOVA table produced below, most of the variation in *amphetamine* usage is explained by **reference country** (Mean sq value of 10.98), and some variation is also explained by **PctYouth** (Mean sq value of 2.54). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following subsection.
-```{r}
-#Generate ANOVA table and summary
-anova(ampmod)
-summary(ampmod)
-```
-
-
-##### 7.2.6.1 Simplified Model
-Here we simplify our model to exclude GDP and the variable interactions.
-
-Results from the ANOVA table produced below suggest that there is a significant difference in *amphetamine* consumption among the European countries examined in this study, with Belgium consuming the most *amphetamine* and Spain consuming the least (F=23.2, df=7, p<0.05). Age also had a significant effect on *amphetamine* consumption, with a lower proportion of youth in the population being associated with higher amounts of *amphetamine* usage (F=5.36, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *amphetamine* usage is a function of **PctYouth** and **GDP** was not supported.
-```{r}
-#Recreate model without GDP and interaction terms
-ampmod2 <- lm(data = amphetplot, log.Weekday.mean ~ country + PctYouth)
-
-#Generate ANOVA table
-anova(ampmod2)
-
-#Generate summary
-summary(ampmod2)
-```
-
-
-### 7.2.7 Replot
-Here we replot our amphetamine data using predicted values from our linear model
-```{r}
-# Plot by country first
-# Make new x values with unique country values, and mean age and GDP (standardizes it)
-new.x3 <- expand.grid( 
-  country = unique(amphetplot$country),
-  PctYouth = mean(amphetplot$PctYouth),
-  log.GDP = mean(amphetplot$log.GDP))
+# Plot by log(GDP) vs cocaine by country to visualize the interaction.
+# Make new x values 
+new.x1 <- expand.grid( 
+  country = unique(cocaineplot$country),
+  PctYouth = mean(cocaineplot$PctYouth),
+  log.GDP = seq(from=min(cocaineplot$log.GDP), to=max(cocaineplot$log.GDP) +1))
 
 #New y values predicted from the model
-new.y3 <- predict(ampmod2, newdata = new.x3, interval = "confidence")
+new.y1 <- predict(cocmod, newdata = new.x1, interval = "confidence")
 
-#Add the new x and y to a data frame called addThese3
-addThese3 <- data.frame(new.x3, new.y3)
+#Add the new x and y to a data frame called addThese1
+addThese1 <- data.frame(new.x1, new.y1)
 
-#Plot amphetamine consumption by country using predicted values
-ggplot(data = addThese3, aes(x = country, y = fit)) +
-  geom_point(size = 4) +
-  geom_errorbar(data = addThese3, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
-  xlab("Country") +
-  ylab("Mean Amphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean Amphetamine Consumed by European Country") +
-  theme_bw()
-
-
-#Now do the same with age
-#Make new x values
-new.x4 <- expand.grid( 
-  country = unique(amphetplot$country),
-  PctYouth = seq(from=min(amphetplot$PctYouth), to=max(amphetplot$PctYouth) +1),
-  log.GDP = mean(amphetplot$log.GDP))
-
-#New y values predicted from the model
-new.y4 <- predict(ampmod2, newdata = new.x4, interval = "confidence")
-
-#Add the new x and y to a data frame called addThese2
-addThese4 <- data.frame(new.x4, new.y4)
-
-#Plot age vs cocaine consumption including countries
-ggplot(data = addThese4, aes(x = PctYouth, y = fit, group = country, color = country)) +
+#Plot GDP and cocaine consumption by country using predicted values
+ggplot(data = addThese1, aes(x = log.GDP, y = fit, group = country, color = country)) +
   geom_point() +
   geom_smooth(method="lm") +
-  xlab("Percent Youth (Ages 15-24)") +
-  ylab("Mean Amphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean Amphetamine Consumed vs Percent Youth") +
-  theme_classic()
+  geom_errorbar(data = addThese1, aes(ymin = lwr, ymax = upr), size = 0.2, stat = "identity") +
+  xlab("log(GDP)") +
+  ylab("Mean Cocaine Consumed (log mg/1000 people/day)") +
+  ggtitle("Figure 6.2i") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
 
-## 7.3 Methamphetamines
-Next, we looked at *methamphetamine* usage.
-
-### 7.3.1 Organize Data
-To perform this analysis, we created a subset of only the *methamphetamine* usage data in a new dataframe called methplot.
-```{r Methamphetamines}
-#Create new dataframe containing only data pertaining to methamphetamine
-methplot <- data %>% 
-  filter(drug == "methamphetamine") %>%
-    select(country, PctYouth, log.Weekday.mean, log.GDP) 
-
-#Check data
-glimpse(methplot)
-```
-
-### 7.3.2 Summary Statistics
-Here are the summary statistics (mean, sample size, and standard error by country) for the **methamphetamine** data.
-```{r}
-#Create table with mean methamphetamine levels, sample size, and standard error by country
-plot4 <- methplot %>% 
-  group_by(country) %>%
-    summarise(
-      mean = mean(log.Weekday.mean, na.rm = TRUE),
-      samplesize = n(),
-      SE = std.error(log.Weekday.mean)
-    )
-plot4
-```
-
-### 7.3.3 Plot
-Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *methamphetamine* are presented as simple point plots.
-
-For the first plot of **reference country** vs *methamphetamine* consumption, Austria appears to consume the least amount of *methamphetamine*, while Germany appears to consume the  most. The **PctYouth** vs *methamphetamine* consumption plot does not appear to show any relationship. The **log(GDP)** vs *methamphetamine* plot looks like there may be a positive relationship between **log.(GDP)** and **methamphetamine** consumption. 
-```{r}
-#Plot methamphetamine data by country
-ggplot(data = methplot, aes(x = country, y = log.Weekday.mean)) +
-  geom_point(size = 4) +
-  xlab("Country") +
-  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Methamphetamine Consumed by European Country") +
-  theme_bw()
-
-#Plot methamphetamine data by age
-ggplot(data = methplot, aes(x = PctYouth, y = log.Weekday.mean)) +
-  geom_point() +
-  xlab("Percent Youth (Ages 15-24)") +
-  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Methamphetamine Consumed vs Percent Youth") +
-  theme_classic()
-
-#Plot methamphetamine data by GDP
-ggplot(data = methplot, aes(x = log.GDP, y = log.Weekday.mean)) +
-  geom_point() +
-  xlab("GDP (log(USD))") +
-  ylab("Methamphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Methamphetamine Consumed vs log GDP") +
-  theme_classic()
-```
-
-### 7.3.4 Model
-Here we fit a linear model, where we hypothesize that the effect of country on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)**, using the variables from the methplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
-```{r}
-#Create Model  
-methmod <- lm(data = methplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
-```
-
-### 7.3.5 Check Assumptions
-Before we can run the linear model with *methamphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (top right) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *methamphetamine*.
-```{r}
-#Check assumptions
-autoplot(methmod, smooth.colour = NA)
-```
-
-### 7.3.6 Interpret
-Here, we produce an ANOVA table and summary table to help interpret our model. 
-
-First looking at the ANOVA table produced below, most of the variation in *methamphetamine* usage is explained by **reference country** (Mean sq value of 2.40). While **log(GDP)**, **PctYouth**, and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)**, **PctYouth** and the interaction terms in the following section.
-
-```{r}
-#Generate ANOVA table and summary
-anova(methmod)
-summary(methmod)
-```
-
-#### 7.3.6.1 Simplify Model
-Here we simplify our model to exclude, **PctYouth**, **log(GDP)**, and all variable interactions. 
-
-Results from the ANOVA table produced below suggest that there is a significant difference in *methamphetamine* consumption among the European countries examined in this study, with Germany consuming the most *methamphetamine* and Slovenia consuming the least (F=4.98, df=7, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)** was not supported.
-
-```{r}
-#Recreate model without GDP, age, and interaction terms
-methmod2 <- lm(data = methplot, log.Weekday.mean ~ country)
-
-#Generate ANOVA table
-anova(methmod2)
-
-#Generate summary
-summary(methmod2)
-```
-
-### 7.3.7 Replot
-Here we replot our *methamphetamine* data using predicted values from our linear model
-```{r}
-# Plot by country first
-# Make new x values with unique country values, and mean age and GDP (standardizes it)
-new.x5 <- expand.grid( 
-  country = unique(methplot$country),
-  PctYouth = mean(methplot$PctYouth),
-  log.GDP = mean(methplot$log.GDP))
-
-#New y values predicted from the model
-new.y5 <- predict(methmod2, newdata = new.x5, interval = "confidence")
-
-#Add the new x and y to a data frame called addThese5
-addThese5 <- data.frame(new.x5, new.y5)
-
-#Plot amphetamine consumption by country using predicted values
-ggplot(data = addThese5, aes(x = country, y = fit)) +
-  geom_point(size = 4) +
-  geom_errorbar(data = addThese5, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
-  xlab("Country") +
-  ylab("Mean Methmphetamine Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean Methamphetamine Consumed by European Country") +
-  theme_bw()
-```
-
-
-## 7.4 MDMA
-Lastly, we investigated *MDMA* usage. 
-
-### 7.4.1 Organize Data
-To perform this analysis, we created a subset of the *MDMA* data in a new dataframe called MDMAplot.
+## 6.3 MDMA
+In the following subsection, we investigate *MDMA* usage. To perform this analysis, we created a subset of the *MDMA* data in a new dataframe called MDMAplot. The summary statistics (mean, sample size, and standard error by country) are presented below.
 ```{r MDMA}
 #Create new dataframe containing only data pertaining to MDMA
 MDMAplot <- data %>%
   filter(drug == "MDMA") %>%
     select(country, PctYouth, log.Weekday.mean, log.GDP)
 
-#Check data
-glimpse(MDMAplot)
-```
-
-### 7.4.2 Summary Statistics
-Here are the summary statistics (mean, sample size, and standard error by country) for the *MDMA* data.
-```{r}
 #Create dataframe with mean MDMA levels, sample size, and standard error by country
 plot5 <- MDMAplot %>% 
   group_by(country) %>%
@@ -1556,64 +1421,93 @@ plot5 <- MDMAplot %>%
 plot5
 ```
 
-### 7.4.3 Plot
-Here, the **log(drug usage)**, **PctYouth**, and **log(GDP)** data associated with *MDMA* are presented as simple point plots.
-
-For the first plot of **reference country** vs *MDMA* consumption, Sweden appears to consume the least amount of *MDMA* while Belgium appears to consume the  most. The **PctYouth** vs *MDMA* consumption plot does not appear to show any relationship, and neither does the **log(GDP)** vs *MDMA* plot.
-```{r}
+Next, we present three plots: MDMA consumed by European country (*Figure 6.3a*), MDMA consumed vs. **PctYouth** (*Figure 6.3b*), and MDMA consumed vs. **GDP** (*Figure 6.3c*). For the first plot of **reference country** vs *MDMA* consumption, Sweden appears to consume the least amount of *MDMA* while Belgium appears to consume the  most (*Figure 6.3a*). The **PctYouth** vs *MDMA* consumption plot does not appear to show any relationship (*Figure 6.3b*), and neither does the **log(GDP)** vs *MDMA* plot (*Figure 6.3c*).
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
 #Plot MDMA data by country
 ggplot(data = MDMAplot, aes(x = country, y = log.Weekday.mean)) +
   geom_point(size = 4) +
   xlab("Country") +
   ylab("MDMA Consumed (log(mg/1000 people/day))") +
-  ggtitle("MDMA Consumed by European Country") +
-  theme_bw()
-
+  ggtitle("Figure 6.3a") +
+  theme_bw() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
 #Plot MDMA data by age
 ggplot(data = MDMAplot, aes(x = PctYouth, y = log.Weekday.mean)) +
   geom_point() +
   xlab("Percent Youth (Ages 15-24)") +
   ylab("MDMA consumed (log(mg/1000 people/day))") +
-  ggtitle("MDMA Consumed vs Percent Youth") +
-  theme_classic()
+  ggtitle("Figure 6.3b") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 
 #Plot MDMA data by GDP
 ggplot(data = MDMAplot, aes(x = log.GDP, y = log.Weekday.mean)) +
   geom_point() +
   xlab("GDP (log(USD))") +
   ylab("MDMA consumed (log(mg/1000 people/day))") +
-  ggtitle("MDMA Consumed vs GDP") +
-  theme_classic()
+  ggtitle("Figure 6.3c") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
 
-### 7.4.4 Model
-Here we fit a linear model, where we hypothesize that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **GDP**, using the variables from the MDMAplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+Then, we fit a linear model, where we hypothesize that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **GDP**, using the variables from the MDMAplot data frame. To address our hypothesis, we are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
 ```{r}
 #Create Model  
 mdmamod <- lm(data = MDMAplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
 ```
 
-### 7.4.5 Check Assumptions
-Before we can run the linear model with *MDMA* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (top right) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *MDMA*.
-```{r}
+Before we can run the linear model with *MDMA* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (*Figure 6.3d*), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (*Figure 6.3e*) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (*Figure 6.3f*) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (*Figure 6.3g*) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *MDMA*.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
 #Check assumptions
-autoplot(mdmamod, smooth.colour = NA)
+MDMAautoplot <- autoplot(mdmamod, smooth.colour = NA) + theme_bw()
+MDMAautoplot[[1]] +
+  labs(title = "Figure 6.3d", # add labels
+       x = "MDMA Model Fitted Values", 
+       y = "Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+MDMAautoplot[[2]] +
+    labs(title = "Figure 6.3e", # add labels
+       x = "MDMA Model Theoretical Quantities", 
+       y = "Standardized Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+MDMAautoplot[[3]] +
+  labs(title = "Figure 6.3f", # add labels
+       x = "MDMA Model Fitted Values") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+MDMAautoplot[[4]] + 
+  labs(title = "Figure 6.3g", # add labels
+       x = "MDMA Model Factor Level Combination") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
 
-### 7.4.6 Interpret
-Here, we produce an ANOVA table and summary table to help interpret our model. 
-
-First looking at the ANOVA table produced below, most of the variation in *MDMA* usage is explained by **PctYouth** (Mean sq value of 1.68). Some variation is also explained by **reference country** (Mean sq of 0.62). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following section.
+Thus, we produce an ANOVA table and summary table to help interpret our model. First looking at the ANOVA table produced below, most of the variation in *MDMA* usage is explained by **PctYouth** (Mean sq value of 4.59). Some variation is also explained by **reference country** (Mean sq of 0.73). **log(GDP)** and all variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)** and the interaction terms in the following section.
 ```{r}
 #Generate ANOVA table and summary
 anova(mdmamod)
 summary(mdmamod)
 ```
 
-#### 7.4.6.1 Simplify Model
-Here we simplify our model to exclude **log(GDP)** and the interaction terms.
 
-Results from the ANOVA table produced below suggest that there is a significant difference in *MDMA* consumption among the European countries examined in this study, with Belgium consuming the most *MDMA* and Slovenia consuming the least (F=4.09, df=7, p<0.05). Age also had a significant effect on *MDMA* consumption, with a lower proportion of youth in the population being associated with higher amounts of *MDMA* usage (F=11.1, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **log(GDP)** was not supported.
+Based on the results of the ANOVA table shown below, we simplify our model to exclude **log(GDP)** and the interaction terms.Results from the ANOVA table suggest that there is a significant difference in *MDMA* consumption among the European countries examined in this study, with Belgium consuming the most *MDMA* and Slovenia consuming the least (F=5.23, df=7, p<0.05). Age also had a significant effect on *MDMA* consumption, with a lower proportion of youth in the population being associated with higher amounts of *MDMA* usage (F=32.80, df=1, p<0.05). Since there were no significant interaction effects between **reference country** : **PctYouth** or **reference country** : **log(GDP)**, our hypothesis that the effect of **reference country** on *MDMA* usage is a function of **PctYouth** and **log(GDP)** was not supported.
 ```{r}
 #Recreate model without GDP, age, and interaction terms
 MDMAmod2 <- lm(data = MDMAplot, log.Weekday.mean ~ country + PctYouth)
@@ -1625,33 +1519,9 @@ anova(MDMAmod2)
 summary(MDMAmod2)
 ```
 
-### 7.4.7 Replot
-Here we replot our *MDMA* data using predicted values from our linear model
-```{r}
-# Plot by country first
-# Make new x values with unique country values, and mean age and GDP (standardizes it)
-new.x6 <- expand.grid( 
-  country = unique(MDMAplot$country),
-  PctYouth = mean(MDMAplot$PctYouth),
-  log.GDP = mean(MDMAplot$log.GDP))
-
-#New y values predicted from the model
-new.y6 <- predict(MDMAmod2, newdata = new.x6, interval = "confidence")
-
-#Add the new x and y to a data frame called addThese6
-addThese6 <- data.frame(new.x6, new.y6)
-
-#Plot MDMA consumption by country using predicted values
-ggplot(data = addThese6, aes(x = country, y = fit)) +
-  geom_point(size = 4) +
-  geom_errorbar(data = addThese6, aes(ymin = lwr, ymax = upr), size = 0.4, stat = "identity") +
-  xlab("Country") +
-  ylab("Mean MDMA Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean MDMA Consumed by European Country") +
-  theme_bw()
-
-
-#Now do the same with age
+In *Figure 6.3h*, we replot our *MDMA* data using predicted values from our linear model by **PctYouth**. 
+```{r, message = FALSE, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+#Plot PctYouth and country vs mean MDMA consumption
 #Make new x values
 new.x7 <- expand.grid( 
   country = unique(MDMAplot$country),
@@ -1668,8 +1538,361 @@ addThese7 <- data.frame(new.x7, new.y7)
 ggplot(data = addThese7, aes(x = PctYouth, y = fit, group = country, color = country)) +
   geom_point() +
   geom_smooth(method="lm") +
+  geom_errorbar(data = addThese7, aes(ymin = lwr, ymax = upr), size = 0.2, stat = "identity") +
   xlab("Percent Youth (Ages 15-24)") +
   ylab("Mean MDMA Consumed (log(mg/1000 people/day))") +
-  ggtitle("Mean MDMA Consumed vs Percent Youth") +
-  theme_classic()
+  ggtitle("Figure 6.3h") +
+  theme_classic() + 
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
 ```
+
+
+## 6.4 Methamphetamine
+Finally, in this last subsection, we look at *methamphetamine* usage. To perform this analysis, we created a subset of only the *methamphetamine* usage data in a new dataframe called methplot. Summary statistics (mean, sample size, and standard error by country) are shown below.
+```{r Methamphetamines}
+#Create new dataframe containing only data pertaining to methamphetamine
+methplot <- data %>% 
+  filter(drug == "methamphetamine") %>%
+    select(country, PctYouth, log.Weekday.mean, log.GDP) 
+
+#Create table with mean methamphetamine levels, sample size, and standard error by country
+plot4 <- methplot %>% 
+  group_by(country) %>%
+    summarise(
+      mean = mean(log.Weekday.mean, na.rm = TRUE),
+      samplesize = n(),
+      SE = std.error(log.Weekday.mean)
+    )
+plot4
+```
+
+Then, we plot the **log(drug usage)** (*Figure 6.4a*), **PctYouth** (*Figure 6.4b*), and **log(GDP)** (*Figure 6.4c*) data associated with *methamphetamine*, presented as simple point plots. For the first plot of **reference country** vs *methamphetamine* consumption, Austria appears to consume the least amount of *methamphetamine*, while Germany appears to consume the  most (*Figure 6.4a*). The **PctYouth** vs *methamphetamine* consumption plot does not appear to show any relationship (*Figure 6.4b*). The **log(GDP)** vs *methamphetamine* plot looks like there may be a positive relationship between **log(GDP)** and **methamphetamine** consumption (*Figure 6.4c*). 
+```{r, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+#Plot methamphetamine data by country
+ggplot(data = methplot, aes(x = country, y = log.Weekday.mean)) +
+  geom_point(size = 4) +
+  xlab("Country") +
+  ylab("Methamphetamine Usage 
+       (log(mg/1000 people/day))") +
+  ggtitle("Figure 6.3a") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+#Plot methamphetamine data by age
+ggplot(data = methplot, aes(x = PctYouth, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Methamphetamine Usage 
+       (log(mg/1000 people/day))") +
+  ggtitle("Figure 6.3b") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+#Plot methamphetamine data by GDP
+ggplot(data = methplot, aes(x = log.GDP, y = log.Weekday.mean)) +
+  geom_point() +
+  xlab("GDP (log(USD))") +
+  ylab("Methamphetamine Usage 
+       (log(mg/1000 people/day))") +
+  ggtitle("Figure 6.3c") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+Next, we fit a linear model to assess our hypothesis that the effect of **reference country** on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)**. We are particularly interested the interaction effects between **reference country** : **PctYouth** and **reference country** : **log(GDP)**. 
+```{r}
+#Create Model  
+methmod <- lm(data = methplot, log.Weekday.mean ~ country + PctYouth + log.GDP + country:PctYouth + country:log.GDP)
+```
+
+Before we can run the linear model with *methamphetamine* data, we first had to verify that the assumptions of this analysis were met. In the residuals vs. fitted plot (top left), there does not appear to be any major hump-shapes or valleys, suggesting the linear model may be a good fit. The Normal QQ plot (top right) isn't perfect, the positive residuals seem to be larger than expected, however, most of the other residuals fall on the line suggesting that these data are approximately normal. The scale-location plot (bottom left) does not show any obvious pattern, suggesting that our data have approximately equal variance. Finally, the Constant Leverage plot (bottom right) shows no obvious influential data points. Thus, we were ready to continue with the linear model for *methamphetamine*.
+```{r, warning=FALSE, fig.show="hold", out.width="50%"}
+#Check assumptions
+methautoplot <- autoplot(methmod, smooth.colour = NA) + theme_bw()
+methautoplot[[1]] +
+  labs(title = "Figure 6.4d", # add labels
+       x = "Methamphetamine Model Fitted Values", 
+       y = "Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+methautoplot[[2]] +
+    labs(title = "Figure 6.4e", # add labels
+       x = "Methamphetamine Model Theoretical Quantities", 
+       y = "Standardized Resiudals") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+methautoplot[[3]] +
+  labs(title = "Figure 6.4f", # add labels
+       x = "Methamphetamine Model Fitted Values") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+
+methautoplot[[4]] + 
+  labs(title = "Figure 6.4g", # add labels
+       x = "Methamphetamine Model Factor Level Combination") +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+We produce an ANOVA table and summary table to help interpret our model. First looking at the ANOVA table produced below, most of the variation in *methamphetamine* usage is explained by **reference country** (Mean sq value of 5.03). A significant amount of variation was also explained by the interaction between **reference country** and **PctYouth** (Mean sq value of 1.04). While **log(GDP)**, **PctYouth**, and all other variable interactions did not capture any significant amount of variation. With this in mind, we will simplify our model to exclude **log(GDP)**, **PctYouth** and the interaction between **reference country** and **log(GDP)**.
+```{r}
+#Generate ANOVA table and summary
+anova(methmod)
+summary(methmod)
+```
+
+Given the results of the ANOVA table produced below, we simplify our model to exclude **PctYouth**, **log(GDP)**, and the interaction between **reference country** and **log(GDP)**. Results from the ANOVA table suggest that there is a significant interaction effect between **reference country** and **PctYouth** (F=2.14, df=7, p<0.05), which partially supports our hypothesis that the effect of **reference country** on *methamphetamine* usage is a function of **PctYouth** and **log(GDP)**.
+```{r}
+#Recreate model without GDP, age, and interaction terms
+methmod2 <- lm(data = methplot, log.Weekday.mean ~ country + country:PctYouth)
+
+#Generate ANOVA table
+anova(methmod2)
+
+#Generate summary
+summary(methmod2)
+```
+
+In *Figure 6.4h*, we replot our *methamphetamine* model predicted values by **PctYouth** to visualize the interaction.
+```{r, message = FALSE, warning=FALSE, fig.align='center', fig.show="hold", out.width="50%"}
+#Replot with age and country in same plot 
+#Make new x values
+new.x5 <- expand.grid( 
+  country = unique(methplot$country),
+  PctYouth = seq(from=min(methplot$PctYouth), to=max(methplot$PctYouth) +1),
+  log.GDP = mean(methplot$log.GDP))
+
+#New y values predicted from the model
+new.y5 <- predict(methmod2, newdata = new.x5, interval = "confidence")
+
+#Add the new x and y to a data frame called addThese5
+addThese5 <- data.frame(new.x5, new.y5)
+
+#Plot age vs cocaine consumption including countries
+ggplot(data = addThese5, aes(x = PctYouth, y = fit, group = country, color = country)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  geom_errorbar(data = addThese5, aes(ymin = lwr, ymax = upr), size = 0.2, stat = "identity") +
+  xlab("Percent Youth (Ages 15-24)") +
+  ylab("Mean Methamphetamine Consumed (log mg/1000 people/day)") +
+  ggtitle("Figure 6.4h") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) + # center title
+  theme(plot.title = element_text(face = "bold")) + # bold title
+  theme(text = element_text(size=14))
+```
+
+# 7.0 References
+Bannwarth, A., Morelato, M., Benaglia, L., Been, F., Esseiva, P., Delemont, O. and Roux, C. (2019). The use of wastewater analysis in forensic intelligence: drug consumption comparison between Sydney and different European cities. Forensic Sci. Res. 4, 141. 
+
+Beckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting Started with R: An Introduction for Biologists 2nd Edition. Oxford, UK: Oxford University Press.
+
+Betancourt W. Q., Schmitz B. W., Innes, G. K., Prasek, S. M., & Brown, P. (2021). COVID-19 containment on a college campus via wastewater-based epidemiology, targeted clinical testing and an intervention. Science of The Total Environment, 779, 0048-9697
+
+Chen K., Kandel D. B., Davies M. (1997). Relationships between frequency and quantity of marijuana use and last year proxy dependence among adolescents and adults in the United States. Drug Alcohol Depend, 46, 53–67
+
+Compton, W. M., Cottler, L. B., Phelps, D. L., Abdallah, B. A, & Spitznagel, E. L. (2000). Psychiatric disorders among drug dependent subjects: are they primary or secondary? Am J Addict, 9, 126–134
+
+Concheiro, M., De Castro, A., Quintela, O., Cruz, A. and Rivadulla, M. L. (2007) Determination of Illicit Drugs and their Metabolites in Human Urine by Liquid Chromatography Tandem Mass Spectrometry Including Relative Ion Intensity Criterion. J. Anal. Toxicol. 31,. 
+
+Lipari, R. N. and Park-Lee, E. (2019). Key Substance Use and Mental Health Indicators in the United States: Results from the 2018 National Survey on Drug Use and Health. 
+
+Metcalf, T. G., Melnick, J. L. and Estes, M. K. (1995). Environmental virology: from detection of virus in sewage and water by isolation to identification by molecular biology--a trip of over 50 years. Annu. Rev. Microbiol. 49, 461–487. 
+
+Moshe, S. (2011). GDP as a Measure of Economic Welfare. ICER Working Paper, Retrieved from https://ssrn.com/abstract=1808685 
+
+Nieves, C., Cadet -James, Y., Mccalman, J. and Haswell, M. SOCIAL DETERMINANTS OF DRUG USE What works? A review of act ions addressing the social and economic determinants of Indigenous he… Katy Osborne A literature review for Indigenous men’s groups. 
+
+Russell, J. M., Newman, S. C., & Bland, R. C. (1994). Epidemiology of psychiatric disorders in Edmonton: Drug abuse and dependence. Acta Psychiatr Scand Suppl, 376, 54–62
+
+Wastewater analysis and drugs — a European multi-city study | www.emcdda.europa.eu. 
+
+Zuccato, E., Chiabrando, C., Castiglioni, S., Bagnati, R. and Fanelli, R. (2008). Estimating community drug abuse by wastewater analysis. Environ. Health Perspect. 116, 1027–1032.
+
+# 8.0 Appendicies
+## Appendix A 
+**Project Metadata**  
+  
+**Drug metabolite data**  
+*Intent of data:*  
+The intent of this data set was to determine the level of use of the drugs cocaine, cannabis, methamphetamines, amphetamines, and MDMA across Europe.
+  
+*Data type:*  
+This dataset takes the form of categorical data.
+  
+*Data acquisition:*  
+This data was accessed through the European Monitoring Centre for Drugs and Drug addiction website: (https://www.emcdda.europa.eu/publications/html/pods/waste-water-analysis_en#siteInfoTable)
+  
+*Study site(s):*  
+The study sites in this data set included wastewater treatment plants from 137 cities across 29 European countries.  
+  
+*Note: cities followed by a number in parantheses indicate where an average was found for multiple waste-water treatment plants*  
+
+*Countries and cities:*  
+Austria: Graz, Hall-Wattens, Innsbruck, Kapfenburg, Klosterneuburg, Kufstein, Murzzuschlag, Purgstall, Region Millstattersee, Strass im Zillertal, Wasserverbard Hofsteig  
+Bosnia: Sarajevo  
+Belgium: Antwerp Deurne, Antwerp Zuid, Boom, Brugge, Brussels, Geraardsbergen, Koksijde, Merchtem, Ninove, Oostende, Ruisbroek Pruus  
+Croatia: Zagreb  
+Cyprus: Limassol, Nicosia  
+Czech Republic: Brno, Budweis, Karlovy Vary, Ostrava, Prague  
+Denmark: Copenhagen  
+Finland: Espoo, Helsinki, Hameenlinna, Joensuu, Jyvaskyla, Kajaani, Kemi, Kokkola, Kotka, Kouvola, Kuopio, Lahti, Lappeenranta, Mariehamn, Mikkeli, Oulu, Pietarsaari, Pori, Rauma, Rovaniemi, Salo, Savonlinna, Seinajoki, Tampere, Turku, Vihti  
+France: Bordeux I, Fort-de-France P, Paris Seine Centre, Paris South Suburbs  
+Germany: Berlin (4), Chemnitz, Dortmund, Dresdend, Dulmen, Erfurt, Frankfurt (3), Hamburg (2), Hannover (2), Magdeburg, Mainz, Munich Gut_Grosslapen, Nuremburg, Rostock, Saarbrücken (2), Stuttgart  
+Great Britain: Bristol, London  
+Greece: Athens, Eleusis, Mytilene, Thessaloniki  
+Iceland: Reykjavik Klettagardar  
+Italy: Bozen, Milan  
+Lithuania: Kaunas, Klaipeda, Vilnius  
+Latvia: Riga  
+Malta: Malta  
+Netherlands: Amsterdam, Eindhoven, Neiuwegein Ijssel, Oudewater, Utrecht  
+Norway: Oslo  
+Poland: Krakow P   
+Portugal: Almada, Lisbon, Porto  
+Romania: Cluj Napoca  
+Serbia: Belgrade, Novi Sad  
+Spain: Barcelona, Castellon, Madrid VdlV, Molina de Segura, Santiago, Valencia (3)  
+Sweden:  Gothenburg, Gavle, Sandviken, Stockholm (2), Soderhamn, Umea, Uppsala  
+Switzerland: Basel, Berne, Geneva, Lausanne, Lugano, St. Gallen Hofen, Zurich  
+Slovenia: Domzale-Kamnik, Koper, Ljubljana, Maribor, Novo mesto, Velenje  
+Slovakia: Bratislava (2), Piestany  
+Turkey: Adana, Istanbul I, Istanbul (II-VII)   
+  
+*Dates of data collection:*  
+The data was collected over a period of 9 years (from 2011-2020).   
+  
+*Data collection methods:*  
+Samples were collected daily over the above specified time period. An automated sampling device was used to collect 24 composite samples for each hour of the day. Samples were collected between 8am-10am the following day and combined to create a representative 24-h composite sample. The concentrations of target residues (in nanograms/litre) were obtained through off and on-line solid phase extraction with polymeric cartridges, and liquid chromatography coupled to mass spectrometry. The drug use for each city was then estimated by multiplying the concentration of each target drug reside with the corresponding flow of sewage (litre/day) and a correction factor (obtained by considering the average excretion rate of a given drug residue and the molecular mass ratio of the parent drug/metabolite) and then dividing by the population served by the wastewater treatment plant. The resulting number represents the amount of substance consumed per day per 1000 people.  Averages of substance consumption were found for the entire week, all weekdays, and the weekend for every year of the study.  
+  
+*Ethical Statement:*  
+Guidelines outlining the main ethical risks for wastewater research and strategies on how to mitigate these risks can be found here: https://score-cost.eu/wp-content/uploads/sites/118/2016/11/WBE-ethical-guidelines-FINAL-March-2016-.pdf.  
+  
+*Preparing the data:*  
+For the purpose of our study, only Countries for which drug metabolite data was available in 6 or more cities were included. This encompossed 8 countries (Austria, Belgium, Finland, Germany, Sweden, Switzerland, Spain, and Slovenia) and 90 cities. Additionally, the time period was narrowed down to 2011-2018.
+To ensure more even comparisons, this study followed a blocking design where 5 cities were randomly selected from each of the 8 remaining countries.
+To randomly select 5 cities from each country, first a sampling frame was constructed in excel where each of the 90 cities were numbered and paired with their corresponding country. This sampling frame was input into R studio (with the read.csv() function) in order to create a series of subsamples for each country. To create the subsamples, the function sample() was used with the arguments x (the range of numbers of the cities in the country of interest), size (how many cities should be in each subsample), and replace (can the same city be selected twice). 
+To get the total sample population for our study, we then used the rbind() function to join together the newly created subsamples. The data frame containing the total sample population was then exported as a .csv file using the write.csv() function so that it could be combined with the drug metabolite data for each randomly selected city and used in downstream analysis. 
+For ease of analysis, only the weekday mean of drug use was considered.   
+  
+**GDP Data:**  
+*Intent of the data:*  
+To determine the gross domestic product (GDP) of 266 countries/regions around the world.   
+GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources.  
+Please see the World Bank website for more information on the limitations of using GDP in data analysis.  
+  
+*Data type:*  
+This dataset takes the form of categorical data.   
+  
+*Data acquisition:*  
+The raw data set was accessed via The World Bank website (https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)   
+  
+*Study site(s):*  
+The study sites in this data set are comprised of 266 different countries/regions around the world. Please see https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country= for a complete list.   
+  
+*Dates of data collection:*  
+The data was collected yearly for a period of 80 years (from 1960-2020).   
+  
+*Data collection methods:*  
+This dataset was based on World Bank national accounts data and OECD National Accounts data files. Data collection methods include: population censuses, household surveys, national accounts, purchasing power parity surveys, income surveys, and agricultural censuses.  
+Country data is collected in the local currency units, and then converted to the constant price of the base year as determined by each country. For GDP, these values are then converted into constant 2010 USD with gap filling of missing values. Missing data are imputed based on the relationship of the sum of available data to the total in the year of the previous estimate.  
+  
+*Country Specifics*  
+Austria: Latest population census conducted in 2011, 1 (1999) euro = 13.7603 Austrian schilling, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.  
+Belgium: Latest population census conducted in 2011, 1 (1999) euro = 40.3399 Belgian franc, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.   
+Finland: Latest population census conducted in 2011, 1 (1999) euro = 5.94573 Finnish markkka, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.   
+Germany: Latest population census conducted in 2011, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.   
+Sweden: Latest population census conducted in 2011, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.   
+Swizterland: Latest population census conducted in 2011, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2010.   
+Spain: Latest population census conducted in 2011, 1 (1999) euro = 166.386 Spanish peseta, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2009.   
+Slovenia: Latest population census conducted in 2018, 1 (1999) euro = 239.64 Slovenian tolar, 2015 = the National Accounts reference year, latest income survey conducted in 2015, latest agricultural census conducted in 2009, latest household survey conducted in 2003.   
+  
+*Preparing the data:*  
+For accurate comparison, the original data set was narrowed down to only include the countries and years considered by our drug metabolite data.   
+  
+**Age data**  
+*Intent of data:*  
+The intent of this dataset was to document the percentage of the population by age group for 235 countries across the world.   
+  
+*Data type:*  
+This data set takes the form of categorical data.   
+  
+*Data acquisition:*  
+This data set was accessed from the United Nations Department of Economic and Social Affair's website (https://population.un.org/wpp/Download/Standard/Interpolated/).   
+  
+*Study site(s):*  
+The study sites within this data set encompass 235 countries from across the world. Please refer to (https://population.un.org/wpp/Download/Metadata/Documentation/) for a full list of the countries included.   
+  
+*Dates of data collection:*  
+The data was collected annually for a period of 70 years (from 1950-2020).   
+  
+*Data collection methods:*  
+The data collection methods were comprised of a mix of census data, population registers, and official estimates.  
+  
+*Country Specifics*  
+Austria: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1951, 1961, 1971, 1981, 1991, 2001, 2011 censuses; population register through 2017; official estimates through 2017.  
+Belgium: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1961, 1970, 1981, 1991, 2001, 2011 censuses; population register through 2017; official estimates through 2017.  
+Finland: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1950, 1960, 1970, 1975, 1985, 1990, 2000, 2010 censuses; population register through 2017; official estimates through 2017.  
+Germany: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1987, 2001, 2011 censuses; population register through 2018; official estimates through 2018.  
+Sweden: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1950, 1960, 1965, 1970, 1975, 1980, 1985, 1990, 2011 censuses; population register through 2018; official estimates through 2018.  
+Swizterland: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1950, 1960, 1970, 1980, 1990, 2000, 2010 censuses; official estimates through 2017.  
+Spain: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1950, 1960, 1970, 1981, 1991, 2001, 2011 censuses; official estimates through 2017.  
+Slovenia: Total population and distribution by age and sex estimated to be consistent with the population by age and sex of the 1953, 1961, 1971, 1981, 1991, 2002, 2011, 2015 censuses; population register through 2017; official estimates through 2017.  
+  
+*Preparing the data:*  
+For accurate comparison, the original data set was narrowed down to only include the countries and years considered by our drug metabolite and GDP data. 
+For ease of analysis, only information on the percentage of the population within the age group 15-24 (for each Country) was extracted from the original data set. 
+A separate file with the above changes was created in excel for further analysis in R studio.  
+  
+**Codebook:**  
+Units  
+Drug metabolites (amphetamines, methamphetamines, cocaine, MDMA):  mg/1000 people/day  
+GDP: 2010 USD  
+Population: Percentage of total population that is 15-24  
+  
+**Extra tools/software:**  
+Github, excel, R Studio   
+  
+## Appendix B  
+**Wastewater Based Epidemiology (WBE)**  
+  
+Wastewater based epidemiology (WBE) is a chemical analysis technique used to detect a myriad of compounds for regions serviced by wastewater treatment facilities. The functions of this technique range from monitoring environmental impact of household liquid waste to the very topical application of detecting the presence of Covid-19 (Glassmeyer et al., 2005), (Bentacourt et al., 2021).
+
+Wastewater data account for response bias by indiscriminately collecting wastewater from a given locality. It is broad in the sense that only the averages for a population can be gleaned and will not reveal the true distribution of drug use for individuals within in a population. However, given the scale, consistency, and reliability of the method, these wastewater data can be paired with other demographic data for multiple locations to tease out potential factors affecting drug consumption (Castiglioni et al., 2014).
+
+In order to estimate levels of drug use from wastewater, researchers first identify and quantify drug residues. Then, concentration is determined by measuring the daily flow rate for the location the sample was taken. Next, a correction factor is applied to each drug to account for changes in structure and quantity after metabolism. The back-calculated total quantity of consumption is then divided by the population for the area serviced by the treatment facility. And finally, an average is produced for each drug consumed. This method is not novel but has never before been applied on such a large geographic and temporal scale. Indeed, this represents a large scale coordinated effort to quantify drug use patterns for critical populations. The consistency exercised throughout the study lends credence to the undertaking, making it perfectly adaptable to further investigations. This dataset therefore served as the primary scaffolding for our own investigation. With so many geographic domains represented through time, we were interested in determining if these wastewater data could be used with other known variables to explore potential relationships between drug use and demographic characteristics of a population.
+
+The countries from this set that we chose to include in this study were; Spain, Sweden, Switzerland, Belgium, Finland, Austria, Germany, and Slovenia.
+
+## Appendix C 
+**Project Packages**  
+  
+|Package       |Description                 |Link                   |
+|:-------------|:---------------------------|:----------------------|
+|dplyr |Data tidying package |https://cran.r-project.org/web/packages/dplyr/index.html |
+|ggfortify |Data visualization package |https://cran.r-project.org/web/packages/ggfortify/index.html |
+|ggplot2 |Data visualization package |https://cran.r-project.org/web/packages/ggplot2/index.html |
+|lattice |Data visualization package |https://cran.r-project.org/web/packages/lattice/index.html |
+|lubridate |Data tidying package |https://cran.r-project.org/web/packages/lubridate/index.html |
+|plotrix |Data visualization package |https://cran.r-project.org/web/packages/plotrix/index.html |
+|readr |Data tidying package |https://cran.r-project.org/web/packages/readr/index.html |
+|stringr |Data tidying package |https://cran.r-project.org/web/packages/stringr/index.html |
+|tidyr |Data tidying package |https://cran.r-project.org/web/packages/tidyr/index.html |
+
+
+
