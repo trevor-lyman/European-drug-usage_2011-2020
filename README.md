@@ -3,7 +3,7 @@ Trevor Pettit (tpettit3@uwo.ca, he/him), Scout Thompson, Peter Baker, and Jake S
 
 ## This is a repository for our UWO Biology 9915 term project on an analysis of European drug usage by country, as a function of both the number of 'youth' (aged 15 to 24) and the relative wealth (GDP, 2011 USD) of the respective country. 
 
-## An itemized list of the contents of this repository:
+## An itemized list of the contents of this repository (in the order they appear in the project contents window):
 1. **Archived materials**: working drafts of project files included in previous commits. 'Fork' repository (instructions available from: https://docs.github.com/en/get-started/quickstart/fork-a-repo) and see project history for more information.
 2. **Data**: folder including source data .csv files, consistent with original source data cited in project metadata and .html file section 'Appendix A'. See note on data and organization of project files below for more information.
 3. **Presentation materials**: a copy of project in-class presentation, given December 6, 2021. This presentation was designed to fit approximately 35 minutes of content, and to allow for approximately 10 minutes of questions. Note that interactive elements were designed to be a part of this presentation; 'GitHub' and 'Naloxone' demonstrations were organized in-tandem with this presentation.
