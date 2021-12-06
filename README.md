@@ -1,4 +1,4 @@
-# Investigating drug usage across European countries as a factor of age and GDP using wastewater metabolite data (Last Updated: Dec. 6, 2021)
+# Investigating drug usage across European countries as a factor of age and GDP using wastewater metabolite data (Last Updated: Dec. 6, 2021).
 Trevor Pettit (tpettit3@uwo.ca, he/him), Scout Thompson, Peter Baker, and Jake Simanek 
 
 ## This is a repository for our UWO Biology 9915 term project on an analysis of European drug usage by country, as a function of both the number of 'youth' (aged 15 to 24) and the relative wealth (GDP, 2011 USD) of the respective country. 
